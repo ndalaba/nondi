@@ -1,13 +1,17 @@
 from app import db
 
+
 class Repository:
 
-    def save(self,entity):
+    @staticmethod
+    def save(entity):
         db.session.add(entity)
         db.session.commit()
     
-    def delete(self,entity):
+    @staticmethod
+    def delete(entity):
         db.session.delete(entity)
         db.session.commit()
 
-repository= Repository()
+
+# repository = Repository()

@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.entity.Entities import Message
+from app.entity.Message import Message
 from flask_login import current_user
 from sqlalchemy import text
 
@@ -12,10 +12,4 @@ def inject_mail():
     return dict(unread_mails=emails, email_count=len(emails))
 
 from . import profils
-from . import educations
-from . import jobs
-from . import services
-from . import hobbies
-from . import skills
-from . import works
 from . import messages

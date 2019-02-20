@@ -1,7 +1,7 @@
 from flask import redirect, render_template, flash,url_for, request
 from . import admin
 from flask_login import login_required, current_user
-from app.entity.Entities import Message
+from app.entity.Message import Message
 from sqlalchemy import text
 from app.repository.Repository import repository
 from flask_mail import Message as Msg

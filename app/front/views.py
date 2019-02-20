@@ -1,29 +1,20 @@
-import random
-
 from flask import render_template, url_for, jsonify, redirect, request
-
-from app.entity.Entities import Message, Job, Education,Work
 from app.entity.User import User
 from app.repository.Repository import repository
 from . import front
 from .form import EmailForm
 from flask_mail import Message as Msg
-from sqlalchemy import text
 from app import mail
+from app.entity.Message import Message
 
 
 @front.route('/')
 def index():
-    colors = ['blue.css', 'brown.css', 'cyan.css', 'gray.css']
+
     user = User.query.filter_by(uid='a6c5a240').first()
-    color = url_for('static', filename="css/colors/" + random.choice(colors))
+
     form = EmailForm()
-    jobs = Job.query.filter(Job.user_id==user.id,Job.published==True).order_by(text('end_at DESC')).all()
-    educations = Education.query.filter(Education.user_id==user.id,Education.published==True).order_by(text('end_at DESC')).all()
-    personal_works= Work.query.filter(Work.user_id==user.id,Work.published==True,Work.category=="PERSONAL").all()
-    #works= Work.query.filter(Work.user_id==user.id,Work.published==True,Work.category!="PERSONAL").all()
-    works= Work.query.filter(Work.user_id==user.id,Work.published==True).all()
-    return render_template('front/base.html', user=user, color=color, form=form,jobs=jobs,educations=educations, personal_works=personal_works,works=works)
+    return render_template('front/base.html', user=user)
 
 
 @front.route('/contact', methods=['POST'])

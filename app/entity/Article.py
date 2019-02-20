@@ -28,9 +28,8 @@ class Article(Entity, db.Model):
     top = db.Column(db.Boolean, default=0)
     content = db.Column(db.Text)
     image = db.Column(db.String(190), default='upload/noimage.png')
-
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    category_id = db.column(db.Integer, db.ForeignKey('categories.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
     user = db.relationship('User', back_populates="articles")
     category = db.relationship('Category', back_populates="articles")

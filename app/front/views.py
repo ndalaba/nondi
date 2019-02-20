@@ -1,6 +1,6 @@
 from flask import render_template, url_for, jsonify, redirect, request
 from app.entity.User import User
-from app.repository.Repository import repository
+from app.repository.Repository import Repository
 from . import front
 from .form import EmailForm
 from flask_mail import Message as Msg
@@ -32,7 +32,7 @@ def contact():
             email.subject = form.subject.data
             email.message = form.message.data
             email.name = form.name.data
-            repository.save(email)
+            Repository.save(email)
             
             msg = Msg(email.subject, sender=(email.name,email.email_from), recipients=[user.email])
             msg.body = email.message

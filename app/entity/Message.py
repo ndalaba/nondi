@@ -16,7 +16,7 @@ class Message(Entity, db.Model):
     folder = db.Column(db.String(50))  # INBOX, SENT, DRAFT, STRASH
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    user = db.relationship('User', back_populates='emails')
+    user = db.relationship('User', back_populates='messages')
 
     def __init__(self, user_id):
         Entity.__init__(self)

@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, url_for, request
 from flask_login import login_required, current_user
 
 from app.admin.forms import UserForm, PasswordForm
-from app.repository.Repository import repository
+from app.repository.Repository import Repository
 from app.utils.upload import uploadImage
 from . import admin
 
@@ -17,18 +17,18 @@ def home():
 
 @admin.route('/profils')
 def profil():
-    form= UserForm(obj=current_user)
-    passwordForm= PasswordForm()
-    return render_template('admin/profils/profil.html', form=form, passwordForm=passwordForm)
+    form = UserForm(obj=current_user)
+    password_form = PasswordForm()
+    return render_template('admin/profils/profil.html', form=form, passwordForm=password_form)
 
 
 @admin.route('/edit_profil', methods=['POST'])
 @login_required
 def edit_profil():
 
-    form= UserForm(obj=current_user)
+    form = UserForm(obj=current_user)
     
-    if request.method=='POST': 
+    if request.method == 'POST':
         if form.validate_on_submit:
             if form.photo.data and form.photo.data!=current_user.photo:
                 image = uploadImage(form.photo.data,'upload/users/')
@@ -39,7 +39,7 @@ def edit_profil():
             current_user.phone=form.phone.data
             current_user.facebook=form.facebook.data
             current_user.location=form.location.data
-            repository.save(current_user)
+            Repository.save(current_user)
             flash('Compte mis à jour avec succès','success')
             return redirect(url_for('admin.profil'))
         
@@ -58,7 +58,7 @@ def edit_password():
     if request.method=='POST': 
         if form.validate_on_submit:
             current_user.password=form.password.data
-            repository.save(current_user)
+            Repository.save(current_user)
             flash('Mot de passe modifié avec succès','success')
             return redirect(url_for('admin.profil'))
         

@@ -5,6 +5,7 @@ from app import db, login_manager
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
+
 class User(Entity, UserMixin, db.Model):
     
     __tablename__ = "users"
@@ -19,14 +20,9 @@ class User(Entity, UserMixin, db.Model):
     photo = db.Column(db.String(130), unique=True)
     facebook = db.Column(db.String(150))
 
-    educations = db.relationship('Education', back_populates="user")
-    jobs = db.relationship('Job', back_populates="user")
-    services = db.relationship('Service', back_populates="user")
-    skills = db.relationship('Skill', back_populates="user")
-    works = db.relationship('Work', back_populates="user")
-    hobbies = db.relationship('Hobby', back_populates="user")
-    activities = db.relationship('Activity', back_populates="user")
-    emails = db.relationship('Message', back_populates="user")
+    articles = db.relationship('Article', back_populates="user")
+    messages = db.relationship('Message', back_populates="user")
+    videos = db.relationship('Video', back_populates="user")
 
     @property
     def password(self):

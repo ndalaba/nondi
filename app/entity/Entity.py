@@ -1,8 +1,11 @@
 # Base Entity
 
 from datetime import datetime
+
 from sqlalchemy import Column, String, DateTime, event, Boolean
+
 from app.utils.str_helper import generate_uuid
+
 
 class Entity(object):
 
@@ -12,7 +15,7 @@ class Entity(object):
     published = Column(Boolean, default=False)
 
     def __init__(self):
-        self.uid=generate_uuid(5)
+        self.uid = generate_uuid(5)
     
     @staticmethod
     def _updated_at(mapper, connection, target):

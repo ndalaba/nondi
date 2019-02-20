@@ -1,0 +1,30 @@
+<article class="hs-content skills-section" id="section6">
+    <span class="sec-icon fa fa-diamond"></span>
+    <div class="hs-inner">
+        <span class="before-title">.06</span>
+        <h2>COMPÉTENCES</h2>
+        {% for skill in user.skills %}
+            {% if skill.published %}
+                <span class="content-title">{{ skill.skill | upper }}</span>
+                <div class="skolls">
+            <span class="skill-description">{{ skill.description }}</span>
+            <div class="bar-main-container">
+                <div class="wrap">
+                    <div class="bar-percentage" data-percentage="{{ skill.percent }}"></div>
+                    <span class="skill-detail"><i class="fa fa-bar-chart"></i>NIVEAU : {{ skill.level | upper }}</span>
+                    <span class="skill-detail"><i class="fa fa-binoculars"></i>EXPERIENCE : {{ skill.experience }} ANS</span>
+                    <div class="bar-container">
+                        <div class="bar"></div>
+                    </div>
+                    {% set technos= skill.techno.split(',') %}
+                    {% for techno in technos %}
+                    <span class="label">{{ techno }}</span>
+                    {% endfor %}
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</article>

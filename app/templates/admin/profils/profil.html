@@ -1,0 +1,147 @@
+{% extends "admin/base.html" %}
+{% block title %} Profil {{current_user.name}} {% endblock %}
+{% block content %}
+
+<!--suppress ALL -->
+    <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Profil utilisateur
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{url_for('admin.home')}}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+            <li class="active">Profil</li>
+        </ol>
+    </section>
+    {% include "admin/inc/success_error.html" %}
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-3">
+
+                <!-- Profile Image -->
+                <div class="box box-primary">
+                    <div class="box-body box-profile">
+                        <img class="profile-user-img img-responsive img-circle" src="{{url_for('static',filename=current_user.photo)}}"  alt="{{current_user.name}}">
+
+                        <h3 class="profile-username text-center">{{current_user.name}}</h3>
+
+                        <p class="text-muted text-center">{{current_user.job}}</p>
+
+                        {# <ul class="list-group list-group-unbordered">
+                            <li class="list-group-item">
+                                <b>Followers</b> <a class="pull-right">1,322</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Following</b> <a class="pull-right">543</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Friends</b> <a class="pull-right">13,287</a>
+                            </li>
+                        </ul>#}
+
+                        <a href="#" class="btn btn-primary btn-block"><b>Suivre</b></a>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+
+                <!-- About Me Box -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">A propos</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <strong><i class="fa fa-book margin-r-5"></i> Formations</strong>
+
+                        <p class="text-muted">
+                            {{ random.choice(current_user.educations).formation }}
+                        </p>
+
+                        <hr>
+
+                        <strong><i class="fa fa-map-marker margin-r-5"></i> Adresse</strong>
+
+                        <p class="text-muted">{{current_user.location}}</p>
+
+                        <hr>
+
+                        <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+
+                        <p>
+                            {% for skill in current_user.skills%}
+                            <span class="label label-{{ random.choice(colors) }}">{{skill.skill}}</span>
+                            {% endfor %}
+                        </p>
+
+                        <hr>
+
+                        <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+
+                        <p>{{current_user.bio | safe}}.</p>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#activity" data-toggle="tab">Activités</a></li>
+                        <li><a href="#settings" data-toggle="tab">Réglage</a></li>
+                        <li><a href="#passwords" data-toggle="tab">Mot de passe</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="active tab-pane" id="activity">
+
+                            <div class="post clearfix">
+                                {% for activity in current_user.activities %}
+                                    <div class="user-block">                                
+                                        <span class="username">
+                                            <a>{{activity.description}}</a>
+                                            <a title="Supprimer l'activité?" href="{{url_for('admin.activities',uid=activity.uid)}}" class="pull-right btn-box-tool delete"><i class="fa fa-times"></i></a>
+                                        </span>
+                                        <span class="description">{{activity.created_at | datetimeformat}}</span>
+                                    </div>
+                                    <hr>
+                                {% endfor %}
+                                <form class="form-horizontal" action="{{url_for('admin.activities',uid='NULL')}}" method="POST">
+                                    <div class="form-group margin-bottom-none">
+                                        <div class="col-sm-10">
+                                            <input class="form-control input-sm" placeholder="Activité" name="activity">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">Ajouter</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                          
+                        </div>
+
+                        <div class="tab-pane" id="settings">
+                           {% include "admin/profils/edit_profil.html" %}
+                        </div>
+                        <div class="tab-pane" id="passwords">
+                            {% include "admin/profils/edit_password.html" %}
+                         </div>
+                        <!-- /.tab-pane -->
+                    </div>
+                    <!-- /.tab-content -->
+                </div>
+                <!-- /.nav-tabs-custom -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+</div>
+
+{% endblock %}

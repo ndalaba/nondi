@@ -1,0 +1,28 @@
+<article class="hs-content contact-section" id="section8">
+    <span class="sec-icon fa fa-paper-plane"></span>
+    <div class="hs-inner">
+        <span class="before-title">.08</span>
+        <h2>CONTACT</h2>
+        <div class="contact_info">
+            <h3>Entrer en contact</h3>
+            <hr>
+            <h5>Nous pouvons vous aider</h5>
+            <h6>Utiliser le formulaire si dessous pour nous contacter</h6>
+            <hr>
+        </div>
+        <!-- Contact Form -->
+        <fieldset id="contact_form">
+            <div id="result"></div>
+            <input type="hidden" name="user" value="{{ user.uid }}">
+            {{ form.name(required='required',placeholder="NOM") }}
+            {{ form.email(required='required',type='email',placeholder="EMAIL") }}
+            {{ form.subject(required='required',placeholder="SUJET") }}
+            {{ form.message(required='required',placeholder="MESSAGE") }}
+            <span class="submit_btn" id="submit_btn"><i class="fa fa-send"></i> ENVOYER</span>
+        </fieldset>
+        <!-- End Contact Form -->
+    </div>
+</article>
+<script>
+    var contact_url="{{ url_for('front.contact') }}";
+</script>

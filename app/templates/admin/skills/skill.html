@@ -1,0 +1,94 @@
+{% extends "admin/base.html" %}
+{% block title %} Compétences {{ current_user.name }} {% endblock %}
+{% block content %}
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Compétences
+                <small>Savoir faire</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{ url_for('admin.home') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+                <li class="active">Compétences</li>
+            </ol>
+        </section>
+     {% include "admin/inc/success_error.html" %}
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">LISTE COMPÉTENCE</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr>
+                                    <th>Compétence</th>
+                                    <th>Technologie</th>
+                                    <th>Niveau</th>
+                                    <th>Pourcentage</th>
+                                    <th>Expérience</th>
+                                    <th>Etat</th>
+                                    <th>Action</th>
+                                </tr>
+                                {% for skill in skills %}
+                                    <tr>
+                                    <td>
+                                        <a href="#" title="{{ skill.skill }}">{{ skill.skill }}</a>
+                                        </td>
+                                     <td>{{ skill.techno }}</td>
+                                     <td>{{ skill.level }}</td>
+                                        <td>
+                                            <div class="progress progress-sm active">
+                                                <div class="progress-bar progress-bar-{{ random.choice(colors) }} progress-bar-striped" role="progressbar" aria-valuenow="{{ skill.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ skill.percent }}%">
+                                                  <span class="sr-only">{{ skill.percent }}% </span>
+                                                </div>
+                                              </div>
+                                        </td>
+                                        <td>{{ skill.experience }}  an(s)</td>
+                                        {% if skill.published %}
+                                            <td>
+                                                <span class="label label-success">Publié</span>
+                                            </td>
+                                        {% else %}
+                                            <td>
+                                                <span class="label label-danger">Brouillon</span>
+                                            </td>
+                                        {% endif %}
+                                    <td>
+                                        <a class="btn btn-primary btn-sm" href="{{ url_for('admin.edit_skill',uid=skill.uid) }}" title="{{ skill.formation }}"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-default btn-sm delete" title="Supprimer la compétence?" href="{{url_for('admin.delete_skill',uid=skill.uid)}}"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-md-6">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">EDITION D'UNE COMPÉTENCE</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                        {% include 'admin/skills/form.html' %}
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}

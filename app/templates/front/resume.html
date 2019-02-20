@@ -1,0 +1,66 @@
+<article class="hs-content resume-section" id="section2">
+    <span class="sec-icon fa fa-newspaper-o"></span>
+    <div class="hs-inner">
+        <span class="before-title">.02</span>
+        <h2>CV</h2>
+        <!-- Resume Wrapper -->
+        <div class="resume-wrapper">
+            <ul class="resume">
+                <!-- Resume timeline -->
+                <li class="time-label">
+                    <span class="content-title">FORMATION</span>
+                </li>
+                {% for education in educations %}
+                {% if education.published %}
+                <li>
+                    <div class="resume-tag">
+                        <span class="fa fa-graduation-cap"></span>
+                        <div class="resume-date">
+                            <span>{{ education.begin_at | datetimeformat('%Y') }}</span>
+                            <div class="separator"></div>
+                            <span>{{ education.end_at | datetimeformat('%Y') }}</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-location"><i class="fa fa-map-marker"></i>{{ education.location }}</span>
+                        <h3 class="timeline-header">{{ education.formation }}</h3>
+                        <div class="timeline-body">
+                            <h4>{{ education.school }}</h4>
+                            <span>{{ education.description }}</span>
+                        </div>
+                    </div>
+                </li>
+                {% endif %}
+                {% endfor %}
+
+                <li class="time-label">
+                    <span class="content-title">EMPLOI ET EXPÉRIENCE</span>
+                </li>
+             {% for job in jobs %}
+                {% if job.published %}
+                <li>
+                    <div class="resume-tag">
+                        <span class="fa fa-briefcase"></span>
+                         <div class="resume-date">
+                            <span>{{ job.begin_at | datetimeformat('%Y') }}</span>
+                            <div class="separator"></div>
+                            <span>{{ job.end_at | datetimeformat('%Y') }}</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-location"><i class="fa fa-map-marker"></i>{{ job.location }}</span>
+                        <h3 class="timeline-header">{{ job.title | upper }}</h3>
+                        <div class="timeline-body">
+                            <h4>{{ job.company }}</h4>
+                            <span>{{ job.description }}</span>
+                        </div>
+                    </div>
+                </li>
+              {% endif %}
+                {% endfor %}
+                <!-- End Resume timeline -->
+            </ul>
+        </div>
+        <!-- End Resume Wrapper -->
+    </div>
+</article>

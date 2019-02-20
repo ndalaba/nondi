@@ -1,0 +1,83 @@
+{% extends 'admin/base.html' %}
+{% block title %} Courrier {{ current_user.name }} {% endblock %}
+{% block content %}
+    <div class="content-wrapper" style="min-height: 946px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Courrier
+        <small>{{email_count}} nouveaux messages</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li class="active">Courrier</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        {% include "admin/messages/navigation.html" %}
+        <!-- /.col -->
+      <div class="col-md-9">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Lire le message</h3>
+      
+            <div class="box-tools pull-right">
+              <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Previous"><i
+                  class="fa fa-chevron-left"></i></a>
+              <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Next"><i
+                  class="fa fa-chevron-right"></i></a>
+            </div>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body no-padding">
+            <div class="mailbox-read-info">
+              <h3>{{email.subject}}</h3>
+              <h5>De: {{email.email_from}}
+                <span class="mailbox-read-time pull-right">{{email.created_at | datetimeformat }}</span></h5>
+            </div>
+            <!-- /.mailbox-read-info -->
+            <div class="mailbox-controls with-border text-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title=""
+                  data-original-title="Delete">
+                  <i class="fa fa-trash-o"></i></button>
+                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title=""
+                  data-original-title="Reply">
+                  <i class="fa fa-reply"></i></button>
+                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title=""
+                  data-original-title="Forward">
+                  <i class="fa fa-share"></i></button>
+              </div>
+              <!-- /.btn-group -->
+              <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="" data-original-title="Print">
+                <i class="fa fa-print"></i></button>
+            </div>
+            <!-- /.mailbox-controls -->
+            <div class="mailbox-read-message">
+              {{email.message | safe}}
+            </div>
+            <!-- /.mailbox-read-message -->
+          </div>
+         
+          <div class="box-footer">
+            <div class="pull-right">
+               <a href="{{url_for('admin.repondre',uid=email.uid)}}" class="btn btn-default"><i class="fa fa-reply"></i> Répondre</a>             
+              <button type="button" class="btn btn-default"><i class="fa fa-share"></i> Faire suivre</button>
+            </div>
+            <a href="{{ url_for('admin.delete_message',uid=email.uid)}}" class="btn btn-default delete" title="Supprimer ce message?"><i class="fa fa-trash-o"></i> Supprimer</a>
+            <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Imprimer</button>
+          </div>
+          <!-- /.box-footer -->
+        </div>
+        <!-- /. box -->
+      </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+{% endblock %}

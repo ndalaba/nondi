@@ -1,0 +1,20 @@
+<div id="header_container">
+    <div id="header">
+        <div><a class="home"><i class="fa fa-home"></i></a>
+        </div>
+        <div><a href="" class="previous-page arrow"><i class="fa fa-angle-left"></i></a>
+        </div>
+        <div><a href="" class="next-page arrow"><i class="fa fa-angle-right"></i></a>
+        </div>
+        <!-- News scroll -->
+        <div class="news-scroll">
+            <span><i class="fa fa-line-chart"></i> ACTIVITÉS RÉCENTES : </span>
+            <ul id="marquee" class="marquee">
+                {% for activity in user.activities %}
+                <li> {{ activity.description }}</li>
+               {% endfor %}
+            </ul>
+        </div>
+        <!-- End News scroll -->
+    </div>
+</div>

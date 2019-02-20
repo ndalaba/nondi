@@ -1,0 +1,8 @@
+body{font-size: 15px}
+.table-bordered>thead>tr>th,.table-bordered>tbody>tr>th{text-transform: uppercase}
+.skin-blue .main-header .navbar {background-color: #222d32;}
+.skin-blue .main-header .logo { background-color: #222d32;}
+@media (max-width: 767px){
+    .main-header .logo{display: none}
+    .fixed .content-wrapper{padding-top: 50px}
+}

@@ -1,0 +1,38 @@
+ <div class="aside1">
+            <a class="contact-button"><i class="fa fa-paper-plane"></i></a>
+            <a class="download-button"><i class="fa fa-cloud-download"></i></a>
+            <div class="aside-content"><span class="part1">DMN</span><span class="part2">{{ user.name }}</span>
+            </div>
+        </div>
+        <aside class="hs-menu" id="hs-menu">
+            <div class="hs-headline">
+                <a id="my-link" href="#my-panel"><i class="fa fa-bars"></i></a>
+                <a href="#" class="download"><i class="fa fa-cloud-download"></i></a>
+                <div class="img-wrap">
+                    <img src="{{ url_for('static',filename=user.photo) }}" alt="" width="150" height="150">
+                </div>
+                <div class="profile_info">
+                    <h1>{{ user.name }}</h1>
+                    <h4>{{ user.job }}</h4>
+                    <h6><span class="fa fa-location-arrow"></span>&nbsp;&nbsp;&nbsp;{{ user.location }}</h6>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+            <div class="separator-aside"></div>
+            <nav>
+                <a href="#section1"><span class="menu_name">A PROPOS</span><span class="fa fa-home"></span> </a>
+                <a href="#section2"><span class="menu_name">BIO</span><span class="fa fa-newspaper-o"></span> </a>
+                <a href="#section3"><span class="menu_name">SERVICES</span><span class="fa fa-laptop"></span> </a>
+               {#  <a href="#section4"><span class="menu_name">PROCESS &amp; TEAM</span><span class="fa fa-users"></span></a>#}
+                <a href="#section5"><span class="menu_name">MES PROJETS</span><span class="fa fa-copyright"></span> </a>
+                <a href="#section6"><span class="menu_name">COMPÉTENCES</span><span class="fa fa-diamond"></span> </a>
+                <a href="#section7"><span class="menu_name">RÉALISATIONS</span><span class="fa fa-archive"></span> </a>
+                <a href="#section8"><span class="menu_name">CONTACT</span><span class="fa fa-paper-plane"></span> </a>
+            </nav>
+            <div class="aside-footer">
+                <a target="_blank" href="{{ user.facebook }}"><i class="fa fa-facebook"></i></a>
+                <a target="_blank" href="{{ user.twitter }}"><i class="fa fa-twitter"></i></a>
+                <a target="_blank" href="{{ user.linkedin }}"><i class="fa fa-linkedin"></i></a>
+                <a target="_blank" href="{{ user.github }}"><i class="fa fa fa-github"></i></a>
+            </div>
+        </aside>

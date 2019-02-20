@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Page personnelle de Diallo Mamadou N'Dalaba, Développeur Web, Paris">
+    <meta name="author" content="Diallo Mamadou N'Dalaba">
+    <link rel="shortcut icon" href="{{ url_for('static',filename=user.photo) }}">
+    <title>{% block title %}{{ user.name }} - Bienvenue!{% endblock %}</title>
+
+    {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="css/bootstrap.min.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename="css/font-awesome.min.css")  }}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename="css/linecons.css")  }}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename="css/normalize.css")  }}">
+    <link rel="stylesheet" type="text/css" href="{{ color }}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename="css/style.css")  }}">
+    {% endblock %}
+    <!-- CSS | Google Fonts -->
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200,400,300,500,600" rel="stylesheet" type="text/css">
+
+    <noscript>
+        <style>
+            @media screen and (max-width: 755px) {
+            .hs-content-scroller {
+                overflow: visible;
+            }
+        }
+    </style>
+    </noscript>
+    <meta name="google-site-verification" content="2GyZRHcBS7kD85EW4KMnGgvVtEYxDe9u5cZs6Ii4IZE" />
+</head>
+
+<body>
+    <!-- Page preloader -->
+    <div id="page-loader">
+        <canvas id="demo-canvas"></canvas>
+    </div>
+    <!-- container -->
+    <div id="hs-container" class="hs-container">
+
+        {% include 'front/inc/sidebar.html' %}
+
+        <a href="#hs-menu" class="hs-totop-link"><i class="fa fa-chevron-up"></i></a>
+
+        <div class="hs-content-scroller">
+            <!-- Header -->
+            {% include 'front/inc/header.html' %}
+
+            <div class="hs-content-wrapper">
+
+                {% include 'front/about.html' %}
+
+                {% include 'front/resume.html' %}
+
+                {% include 'front/services.html' %}
+
+                {#   include 'front/team.html' #}
+
+                {%  include 'front/pricing.html' %}
+
+                {%   include 'front/skill.html' %}
+
+                {% include 'front/portfolio.html' %}
+                {% include 'front/contact.html' %}
+
+            </div>
+            <!-- End hs-content-wrapper -->
+        </div>
+        <!-- End hs-content-scroller -->
+    </div>
+    <!-- End container -->
+    <div id="my-panel">
+    </div>
+    {% block javascript %}
+    <script type="text/javascript" src="{{url_for('static',filename="js/jquery.min.js") }}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename="js/bootstrap.min.js") }}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename="js/default.js") }}"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcGeQrIyfTDwxOusc9RWbpt7LYFZgdedE&libraries=places&language=fr-FR"></script>
+    <script type="text/javascript" src="{{url_for('static',filename="js/watch.js") }}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename="js/layout.js") }}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename="js/main.js") }}"></script>
+    {% endblock %}
+</body>
+
+</html>

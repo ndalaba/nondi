@@ -17,6 +17,7 @@ class Category(Entity, db.Model):
         Entity.__init__(self)
         self.title = title
         self.slug = slug
+        self.published = True
 
 
 class Article(Entity, db.Model):

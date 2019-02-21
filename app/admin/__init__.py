@@ -11,5 +11,7 @@ def inject_mail():
     emails = Message.query.filter_by(user_id=current_user.id, read=False,folder='INBOX').order_by(text('created_at DESC')).all()
     return dict(unread_mails=emails, email_count=len(emails))
 
+
 from . import profils
 from . import messages
+from . import categories

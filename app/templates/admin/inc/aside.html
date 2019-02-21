@@ -25,6 +25,17 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
+            <li class="treeview {% if request.path | startswith('/admin/articles') or request.path | startswith('/admin/categories') %} active {% endif %}">
+                <a href="{{url_for('admin.messages')}}">
+                    <i class="fa fa-newspaper-o"></i> <span>Articles</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{% if request.path=='/admin/categories' %} active {% endif %}"><a href="{{url_for('admin.categories')}}">Catégories</a></li>
+                </ul>
+            </li>
             <li class="treeview {% if request.path | startswith('/admin/messages') %} active {% endif %}">
                 <a href="{{url_for('admin.messages')}}">
                     <i class="fa fa-envelope"></i> <span>Messages</span>

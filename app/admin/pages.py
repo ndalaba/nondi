@@ -1,65 +1,65 @@
 from flask_login import login_required, current_user
 from flask import render_template, redirect, request, flash, url_for
 from . import admin
-from app.repository.Repository import repository
-from app.entity.Entities import Service
-from .forms import Service as ServiceForm
+from app.repository.Repository import Repository
+from app.entity.Entities import Page
+from .forms import Page as PageForm
 
 
-@admin.route('/services')
+@admin.route('/pages')
 @login_required
-def services():
-    form = ServiceForm()
-    services = current_user.services
-    return render_template('admin/services/service.html', form=form, services=services, url=url_for('admin.add_service'))
+def pages():
+    form = PageForm()
+    pages = current_user.pages
+    return render_template('admin/categories/page.html', form=form, pages=pages, url=url_for('admin.add_page'))
 
 
-@admin.route('/services/add', methods=['POST'])
+@admin.route('/pages/add', methods=['POST'])
 @login_required
-def add_service():
-    form = ServiceForm()
+def add_page():
+    form = PageForm()
     if request.method == 'POST':
         if form.validate_on_submit:
-            service = Service(service=form.service.data, user_id=current_user.id)
-            service.icon = form.icon.data
-            service.description = form.description.data
-            service.detail = form.detail.data
-            service.published = form.published.data
-            repository.save(service)
-            flash("Service ajouté avec succès", 'success')
-            return redirect(url_for('admin.services'))
+            page = Page(page=form.page.data, user_id=current_user.id)
+            page.icon = form.icon.data
+            page.description = form.description.data
+            page.detail = form.detail.data
+            page.published = form.published.data
+            repository.save(page)
+            flash("Page ajouté avec succès", 'success')
+            return redirect(url_for('admin.pages'))
         else:
             flash('Formulaire incorrect', 'error')
     else:
-        return redirect(url_for('admin.add_service'))
+        return redirect(url_for('admin.add_page'))
 
 
-@admin.route('/services/edit/<uid>', methods=['GET', 'POST'])
+@admin.route('/pages/edit/<uid>', methods=['GET', 'POST'])
 @login_required
-def edit_service(uid):
-    services = current_user.services
-    service = Service.query.filter_by(uid=uid).first()
-    form = ServiceForm(obj=service)
+def edit_page(uid):
+    pages = current_user.pages
+    page = Page.query.filter_by(uid=uid).first()
+    form = PageForm(obj=page)
 
     if request.method == 'POST':
         if form.validate_on_submit:
-            service.service = form.service.data
-            service.icon = form.icon.data
-            service.detail = form.detail.data
-            service.description = form.description.data
-            service.published = form.published.data
-            repository.save(service)
-            flash("Service modifié avec succès", 'success')
-            return redirect(url_for('admin.services'))
+            page.page = form.page.data
+            page.icon = form.icon.data
+            page.detail = form.detail.data
+            page.description = form.description.data
+            page.published = form.published.data
+            repository.save(page)
+            flash("Page modifié avec succès", 'success')
+            return redirect(url_for('admin.pages'))
         else:
             flash('Formulaire incorrect', 'error')
-    return render_template('admin/services/service.html', form=form, services=services, url=url_for('admin.edit_service', uid=uid), service=service)
+    return render_template('admin/categories/page.html', form=form, pages=pages, url=url_for('admin.edit_page', uid=uid), page=page)
 
 
-@admin.route('/services/delete/<uid>')
+@admin.route('/pages/delete/<uid>')
 @login_required
-def delete_service(uid):
-    service = Service.query.filter_by(uid=uid).first()
-    repository.delete(service)
-    flash("Service supprimé avec succès", 'success')
-    return redirect(url_for('admin.services'))
+def delete_page(uid):
+    page = Page.query.filter_by(uid=uid).first()
+    repository.delete(page)
+    flash("Page supprimé avec succès", 'success')
+    return redirect(url_for('admin.pages'))

@@ -1,17 +1,17 @@
 {% extends "admin/base.html" %}
-{% block title %} Services {{ current_user.name }} {% endblock %}
+{% block title %} Catégories {{ current_user.name }} {% endblock %}
 {% block content %}
 
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Services
-                <small>Domaines d'intervention</small>
+                Categories
+                <small>Articles et vidéos</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ url_for('admin.home') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
-                <li class="active">Services</li>
+                <li class="active">Catégories</li>
             </ol>
         </section>
      {% include "admin/inc/success_error.html" %}
@@ -21,37 +21,38 @@
                 <div class="col-md-6">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">LISTE SERVICE</h3>
+                            <h3 class="box-title">LISTE CATEGORIES</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <table class="table table-bordered">
                                 <tbody>
                                 <tr>
-                                    <th>Service</th>
-                                    <th>Icon</th>
+                                    <th>Titre</th>
+                                    <th>slug</th>
                                     <th>Etat</th>
                                     <th>Action</th>
                                 </tr>
-                                {% for service in services %}
+                                {% for category in categories %}
                                     <tr>
-                                    <td>
-                                        <a href="#" title="{{ service.service }}">{{ service.service }}</a>
+                                        <td>
+                                            <a href="#" title="{{ category.title }}">{{ category.title }}</a>
                                         </td>
-                                        <td><i class="{{ service.icon }}"></i> {{ service.icon }}</td>
-                                       {% if service.published %}
-                                            <td>
-                                                <span class="label label-success">Publié</span>
-                                            </td>
-                                        {% else %}
-                                            <td>
-                                                <span class="label label-danger">Brouillon</span>
-                                            </td>
-                                        {% endif %}
-                                    <td>
-                                        <a class="btn btn-primary btn-sm" href="{{ url_for('admin.edit_service',uid=service.uid) }}" title="{{ service.formation }}"><i class="fa fa-pencil"></i></a>
-                                        <a class="btn btn-default btn-sm delete" title="Supprimer le service?" href="{{url_for('admin.delete_service',uid=service.uid)}}"><i class="fa fa-trash-o"></i></a>
-                                    </td>
+                                    <td>{{ category.slug }}</td>
+
+                                           {% if category.published %}
+                                                <td>
+                                                    <span class="label label-success">Publié</span>
+                                                </td>
+                                            {% else %}
+                                                <td>
+                                                    <span class="label label-danger">Brouillon</span>
+                                                </td>
+                                            {% endif %}
+                                        <td>
+                                            <a class="btn btn-primary btn-sm" href="{{ url_for('admin.edit_category',uid=category.uid) }}" title="{{ category.title }}"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn btn-default btn-sm delete" title="Supprimer le categorie?" href="{{url_for('admin.delete_category',uid=category.uid)}}"><i class="fa fa-trash-o"></i></a>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
@@ -63,11 +64,11 @@
                 <div class="col-md-6">
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            <h3 class="box-title">EDITION D'UNE FORMATION</h3>
+                            <h3 class="box-title">EDITION D'UNE CATÉGORIE</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                        {% include 'admin/services/form.html' %}
+                        {% include 'admin/categories/form.html' %}
                         </div>
                         <!-- /.box-body -->
                     </div>

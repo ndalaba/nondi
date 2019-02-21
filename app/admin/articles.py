@@ -12,7 +12,7 @@ from app.utils.upload import uploadImage
 def works():
     form = WorkForm()
     works = current_user.works #Work.query.all()
-    return render_template('admin/works/work.html', form=form, works=works, url=url_for('admin.add_work'))
+    return render_template('admin/pages/work.html', form=form, works=works, url=url_for('admin.add_work'))
 
 
 @admin.route('/works/add', methods=['POST'])
@@ -62,7 +62,7 @@ def edit_work(uid):
             return redirect(url_for('admin.works'))
         else:
             flash('Formulaire incorrect', 'error')
-    return render_template('admin/works/work.html', form=form, works=works, url=url_for('admin.edit_work', uid=uid), work=work)
+    return render_template('admin/pages/work.html', form=form, works=works, url=url_for('admin.edit_work', uid=uid), work=work)
 
 
 @admin.route('/works/delete/<uid>')

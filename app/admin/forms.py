@@ -24,3 +24,12 @@ class Category(Form):
     title = StringField('Titre', validators=[DataRequired('Veillez renseigner le tittre')])
     description = TextAreaField('Description')
     published = BooleanField('Publié')
+
+
+class Page(Form):
+    title = StringField('Titre', validators=[DataRequired('Veillez renseigner le titre de la page')])
+    content = TextAreaField('Contenu', validators=[DataRequired('Veillez renseigner le contenu de la page')])
+    image = FileField('Image', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    published = BooleanField('Publié')
+
+

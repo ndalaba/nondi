@@ -15,3 +15,4 @@ def inject_mail():
 from . import profils
 from . import messages
 from . import categories
+from . import pages

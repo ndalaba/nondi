@@ -16,3 +16,5 @@ from . import profils
 from . import messages
 from . import categories
 from . import pages
+from . import videos
+from . import persons

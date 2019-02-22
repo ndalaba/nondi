@@ -53,7 +53,9 @@ def edit_page(uid):
             if form.image.data and form.image.data != page.image:
                 image = uploadImage(form.image.data, 'upload/pages/')
                 page.image = image
+            slug_title = slugify(form.title.data)
             page.title = form.title.data
+            page.slug = slug_title
             page.content = form.content.data
             page.published = form.published.data
             Repository.save(page)

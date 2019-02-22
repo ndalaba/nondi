@@ -23,6 +23,7 @@ from .entity.Message import Message
 from .entity.Page import Page
 from .entity.Video import Video
 from .entity.User import User
+from .entity.Person import Person
 
 from .admin import admin as admin_blueprint
 app.register_blueprint(admin_blueprint, url_prefix='/admin')

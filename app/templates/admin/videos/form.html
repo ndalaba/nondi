@@ -1,0 +1,43 @@
+<form method="POST" action="{{ url }}" class="form-horizontal" enctype="multipart/form-data">
+    <div class="form-group row">
+        <label class="col-sm-2 control-label">{{ form.title.label }}</label>
+        <div class="col-sm-10">
+            {{ form.title(class='form-control',required='required',placeholder='Titre video') }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 control-label">Catégorie</label>
+        <div class="col-sm-10">
+            <select name="category" id="category" class="form-control" required>
+                <option value=""> -- Catégorie vidéo -- </option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if video is not undefined and category.id == video.category_id %} selected {% endif %}>{{ category.title }}</option>
+                {% endfor %}
+            </select>
+            {#  form.category(class='form-control',required='required', placeholder='Catégorie vidéo') #}
+        </div>
+    </div>
+     <div class="form-group row">
+        <label class="col-sm-2 control-label">{{ form.video.label }}</label>
+        <div class="col-sm-10">
+            {{ form.video(class='form-control',required='required', placeholder='Lien vidéo') }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 control-label">Etat</label>
+        <label for="published" class="minimal col-sm-10">
+            {{ form.published() }}
+            Publié(e)
+        </label>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 control-label">Description</label>
+        <div class="col-sm-10">
+            {{ form.description(class='form-control summernote') }}
+        </div>
+    </div>
+    <div class="modal-footer text-left">
+        <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Enregistrer</button>
+        <a class="btn btn-default"  href="{{ url_for('admin.videos') }}"><i class="fa fa-times"></i> Annuler</a>
+    </div>
+</form>

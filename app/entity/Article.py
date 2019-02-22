@@ -6,6 +6,8 @@ from app.entity.Entity import Entity
 class Category(Entity, db.Model):
     __tablename__ = "categories"
 
+    CAT_PER_PAGE = 5
+
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(190), nullable=False)
     slug = db.Column(db.String(190), nullable=False)
@@ -22,6 +24,8 @@ class Category(Entity, db.Model):
 
 class Article(Entity, db.Model):
     __tablename__ = "articles"
+
+    POSTS_PER_PAGE = 10
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(190), nullable=False)

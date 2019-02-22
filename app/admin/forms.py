@@ -26,6 +26,15 @@ class Category(Form):
     published = BooleanField('Publié')
 
 
+class Article(Form):
+    title = StringField('Titre', validators=[DataRequired('Veillez renseigner le titre de l\'article')])
+    top = BooleanField('À la une')
+    category = SelectField('Catégorie', coerce=int, validators=[DataRequired()])
+    content = TextAreaField('Contenu')
+    image = FileField('Image', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    published = BooleanField('Publié')
+
+
 class Page(Form):
     title = StringField('Titre', validators=[DataRequired('Veillez renseigner le titre de la page')])
     content = TextAreaField('Contenu', validators=[DataRequired('Veillez renseigner le contenu de la page')])

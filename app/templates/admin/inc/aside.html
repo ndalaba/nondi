@@ -26,14 +26,16 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview {% if request.path | startswith('/admin/articles') or request.path | startswith('/admin/categories') %} active {% endif %}">
-                <a href="{{url_for('admin.messages')}}">
-                    <i class="fa fa-newspaper-o"></i> <span>Articles</span>
+                <a href="{{url_for('admin.articles')}}">
+                    <i class="fa fa-newspaper-o"></i> <span>Actualités</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{% if request.path=='/admin/categories' %} active {% endif %}"><a href="{{url_for('admin.categories')}}">Catégories</a></li>
+                    <li class="{% if request.path=='/admin/articles' %} active {% endif %}"><a href="{{url_for('admin.articles')}}"><i class="fa fa-circle-o"></i> Articles</a></li>
+                    <li class="{% if request.path=='/admin/articles/add_article' %} active {% endif %}"><a href="{{url_for('admin.add_article')}}"><i class="fa fa-circle-o"></i> Nouvel article</a></li>
+                    <li class="{% if request.path=='/admin/categories' %} active {% endif %}"><a href="{{url_for('admin.categories')}}"><i class="fa fa-circle-o"></i> Catégories</a></li>
                 </ul>
             </li>
             <li class="treeview {% if request.path | startswith('/admin/videos') %} active {% endif %}">
@@ -44,7 +46,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{% if request.path=='/admin/videos' %} active {% endif %}"><a href="{{url_for('admin.videos')}}">Vidéos</a></li>
+                    <li class="{% if request.path=='/admin/videos' %} active {% endif %}"><a href="{{url_for('admin.videos')}}"><i class="fa fa-circle-o"></i> Vidéos</a></li>
                 </ul>
             </li>
             <li class="treeview {% if request.path | startswith('/admin/persons') %} active {% endif %}">
@@ -55,7 +57,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{% if request.path=='/admin/persons' %} active {% endif %}"><a href="{{url_for('admin.persons')}}">Personnes</a></li>
+                    <li class="{% if request.path=='/admin/persons' %} active {% endif %}"><a href="{{url_for('admin.persons')}}"><i class="fa fa-circle-o"></i> Personnes</a></li>
                 </ul>
             </li>
             <li class="treeview {% if request.path | startswith('/admin/pages') %} active {% endif %}">
@@ -66,7 +68,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{% if request.path=='/admin/pages' %} active {% endif %}"><a href="{{url_for('admin.pages')}}">Pages</a></li>
+                    <li class="{% if request.path=='/admin/pages' %} active {% endif %}"><a href="{{url_for('admin.pages')}}"><i class="fa fa-circle-o"></i> Pages</a></li>
                 </ul>
             </li>
             <li class="treeview {% if request.path | startswith('/admin/messages') %} active {% endif %}">
@@ -78,7 +80,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="{% if request.path=='/admin/messages' %} active {% endif %}">
-                        <a href="{{url_for('admin.messages')}}">Boite de reception
+                        <a href="{{url_for('admin.messages')}}"><i class="fa fa-circle-o"></i> Boite de reception
                         {% if email_count %}
                             <span class="pull-right-container">
                                 <span class="label label-primary pull-right">{{email_count}}</span>
@@ -86,9 +88,11 @@
                         {% endif %}
                         </a>
                     </li>
-                    <li class="{% if request.path=='/admin/messages/nouveau' %} active {% endif %}"><a href="{{url_for('admin.compose')}}">Nouveau message</a></li>                   
+                    <li class="{% if request.path=='/admin/messages/nouveau' %} active {% endif %}"><a href="{{url_for('admin.compose')}}"><i class="fa fa-circle-o"></i> Nouveau message</a></li>
                 </ul>
             </li>
+            <li class="header">LABELS</li>
+            <li class="{% if request.path=='/admin/profils' %} active {% endif %}"><a href="{{ url_for('admin.profil') }}"><i class="fa fa-user-circle"></i> <span>Profils</span></a></li>
         </ul>
     </section>
     <!-- /.sidebar -->

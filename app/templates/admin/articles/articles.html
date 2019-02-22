@@ -1,0 +1,122 @@
+{% extends "admin/base.html" %}
+{% block title %} Actualités {{ current_user.name }} {% endblock %}
+{% block content %}
+
+    <div class="content-wrapper">
+        <!-- Content Header (Article header) -->
+        <section class="content-header">
+            <h1>
+                Actualités
+                <small>Liste articles</small>
+                <a href="{{ url_for('admin.add_article') }}" class="btn btn-primary" style="margin-left: 20px"><i class="fa fa-plus"></i> Ajouter</a>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{ url_for('admin.home') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+                <li class="active">Articles</li>
+            </ol>
+        </section>
+
+        {% include "admin/inc/success_error.html" %}
+        <form action="" class="form-inline">
+            <section class="content">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title" style="float:left">LISTE ACTUALITÉS</h3>
+                                <div style="margin: 10px;float: right;">
+                                    <div class="form-group">
+                                        <!--<label>Sélectionnez l’action groupée</label>-->
+                                        <select name="action" class="form-control">
+                                            <option value="9999">Actions groupées</option>
+                                            <option value="-1">Supprimer</option>
+                                            <option value="1">Publier</option>
+                                            <option value="0">Dépublier</option>
+                                            <option value="2">A la une</option>
+                                            <option value="-2">Normale</option>
+                                        </select>
+                                        <input type="submit" name="doaction" id="doaction" class="btn btn-primary action" value="Appliquer">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="titre" placeholder="titre actualite">
+                                        <select name="publie" class="form-control">
+                                            <option value="">Etat</option>
+                                            <option value="1">Publiés</option>
+                                            <option value="0">Non Publiés</option>
+                                        </select>
+                                        <select name="une" class="form-control">
+                                            <option value="">position</option>
+                                            <option value="1">Une</option>
+                                            <option value="0">Normale</option>
+                                        </select>
+                                        <select name="category" id="category" class="form-control">
+                                            <option value="">Selectionner une catégorie</option>
+                                            {% for category in categories %}
+                                            <option value="{{ category.id }}">{{ category.title }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <input type="submit" name="doaction" id="post-query-submit" class="btn btn-primary" value="Filtrer">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="box-body table-responsive no-padding">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                        <tr>
+                                            <th><input type="checkbox" title="Tout sélectionner" id="select_all"/></th>
+                                            <th>Titre</th>
+                                            <th>Categorie</th>
+                                            <th>Vue</th>
+                                            <th>Etat</th>
+                                            <th>Position</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        {% for article in articles %}
+                                            <tr>
+                                                <td><input type="checkbox" name="post[]" value="{{ article.uid }}"/></td>
+                                                <td>
+                                                    <a href="{{ article.url }}" target="_blank" title="{{ article.title }}">{{ article.title }}</a>
+                                                </td>
+                                                <td>{{ article.category.title }}</td>
+                                                <td>{{ article.vue }}</td>
+                                                {% if article.published %}
+                                                    <td>
+                                                        <span class="label label-success">Publié</span>
+                                                    </td>
+                                                {% else %}
+                                                    <td>
+                                                        <span class="label label-danger">Brouillon</span>
+                                                    </td>
+                                                {% endif %}
+                                                {% if article.top %}
+                                                    <td>
+                                                        <span class="label label-success">A la une</span>
+                                                    </td>
+                                                {% else %}
+                                                    <td>
+                                                        <span class="label label-primary">Normal</span>
+                                                    </td>
+                                                {% endif %}
+                                                <td>
+                                                    <a class="btn btn-primary btn-sm" href="{{ url_for('admin.edit_article',uid=article.uid) }}" title="{{ article.title }}"><i class="fa fa-pencil"></i></a>
+                                                    <a class="btn btn-default btn-sm delete" title="Supprimer l'article?" href="{{ url_for('admin.delete_article',uid=article.uid) }}"><i class="fa fa-trash-o"></i></a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </section>
+        </form>
+
+        <!-- /.content -->
+    </div>
+{% endblock %}

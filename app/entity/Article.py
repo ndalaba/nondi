@@ -35,6 +35,7 @@ class Article(Entity, db.Model):
     image = db.Column(db.String(190), default='upload/noimage.png')
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+    vue = db.Column(db.Integer, default=0)
 
     user = db.relationship('User', back_populates="articles")
     category = db.relationship('Category', back_populates="articles")

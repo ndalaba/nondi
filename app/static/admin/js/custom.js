@@ -7,6 +7,15 @@ $(function () {
         radioClass: 'iradio_flat-blue'
     });
 
+    $('#select_all').change(function () {
+        var checkboxes = $(this).closest('form').find(':checkbox');
+        if ($(this).is(':checked')) {
+            checkboxes.prop('checked', true);
+        } else {
+            checkboxes.prop('checked', false);
+        }
+    });
+
     //Enable check and uncheck all functionality
     $(".checkbox-toggle").click(function () {
         var clicks = $(this).data('clicks');

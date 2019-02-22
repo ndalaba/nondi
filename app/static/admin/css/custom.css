@@ -1,5 +1,5 @@
 body{font-size: 15px}
-.table-bordered>thead>tr>th,.table-bordered>tbody>tr>th{text-transform: uppercase}
+.table-bordered>thead>tr>th,.table-bordered>tbody>tr>th{text-transform: uppercase;font-weight: 400} label{font-weight: 400}
 .skin-blue .main-header .navbar {background-color: #222d32;}
 .skin-blue .main-header .logo { background-color: #222d32;}
 .treeview-menu>li>a {padding: 5px 5px 5px 35px;}
@@ -7,3 +7,6 @@ body{font-size: 15px}
     .main-header .logo{display: none}
     .fixed .content-wrapper{padding-top: 50px}
 }
+.content-header>h1{text-transform: uppercase;font-size: 20px}
+.content-header>.breadcrumb{text-transform: uppercase;}
+.skin-green .sidebar a{color: #b8c7ce}

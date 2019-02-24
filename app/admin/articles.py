@@ -10,15 +10,46 @@ from . import admin
 from .forms import Article as ArticleForm
 
 
-@admin.route('/articles')
+@admin.route('/articles', methods=['POST', 'GET'])
 @login_required
 def articles():
     categories = Category.query.all()
     page = request.args.get('page', 1, type=int)
-    if current_user.is_admin:
-        articles = Article.query.order_by(Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
+    action = request.args.get('doaction') if request.args is not None else ""
+    if action == "Appliquer":
+        todo = float(request.args.get('todo'))
+        uids = request.args.getlist('uid')
+        if todo == -1:
+            Repository.remove_all_by_uid(Article, uids)
+        elif todo == 1:
+            Repository.publish_all_by_uid(Article, uids)
+        elif todo == 0:
+            Repository.un_publish_all_by_uid(Article, uids)
+        elif todo == 2:
+            Repository.set_top(Article, uids)
+        elif todo == -2:
+            Repository.set_normal(Article, uids)
+        return redirect(url_for('admin.articles'))
+
+    elif action == "Filtrer":
+        title = request.args.get('title')
+        top = request.args.get('une')
+        published = request.args.get('published')
+        category = request.args.get('category')
+        query = Repository.query(Article)
+        query = query.filter(Article.title.like('%' + title + '%')) if title is not None and title != "" else query
+        query = query.filter(Article.top == top) if top is not None and top.isnumeric() else query
+        query = query.filter(Article.published == published) if published is not None and published.isnumeric() else query
+        query = query.filter(Article.category_id == category) if category is not None and category.isnumeric() else query
+        if current_user.is_admin:
+            articles = query.order_by(Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
+        else:
+            articles = query.filter_by(user_id=current_user.id).order_by(Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
     else:
-        articles = Article.query.filter_by(user_id=current_user.id).order_by(Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
+        if current_user.is_admin:
+            articles = Article.query.order_by(Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
+        else:
+            articles = Article.query.filter_by(user_id=current_user.id).order_by(Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
     next_url = url_for('admin.articles', page=articles.next_num) if articles.has_next else None
     prev_url = url_for('admin.articles', page=articles.prev_num) if articles.has_prev else None
     return render_template('admin/articles/articles.html', articles=articles.items, categories=categories, next_url=next_url, prev_url=prev_url)

@@ -44,7 +44,7 @@ class Page(Form):
 
 class Person(Form):
     name = StringField('Nom', validators=[DataRequired('Veillez renseigner le nom')])
-    function = StringField('Fonction', validators=[DataRequired('Veillez renseigner la fonction')])
+    fonction = StringField('Fonction', validators=[DataRequired('Veillez renseigner la fonction')])
     image = FileField('Photo', validators=[FileAllowed(['jpg','jpeg','png'])])
     content = TextAreaField('Description')
     published = BooleanField('Publié')

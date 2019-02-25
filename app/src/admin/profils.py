@@ -35,7 +35,8 @@ def edit_profil():
                 current_user.photo= image
 
             current_user.name=form.name.data
-            current_user.email=form.email.data
+            if current_user.is_admin:
+                current_user.email=form.email.data
             current_user.phone=form.phone.data
             current_user.facebook=form.facebook.data
             current_user.location=form.location.data

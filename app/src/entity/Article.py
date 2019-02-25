@@ -25,7 +25,7 @@ class Category(Entity, db.Model):
 class Article(Entity, db.Model):
     __tablename__ = "articles"
 
-    POSTS_PER_PAGE = 10
+    POSTS_PER_PAGE = 13
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(190), nullable=False)

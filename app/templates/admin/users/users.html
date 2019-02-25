@@ -1,0 +1,70 @@
+{% extends "admin/base.html" %}
+{% block title %} Membres {{ current_user.name }} {% endblock %}
+{% block content %}
+
+    <div class="content-wrapper">
+        <!-- Content Header (User header) -->
+        <section class="content-header">
+            <h1>
+                Membres
+                <small>Membres site</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{ url_for('admin.home') }}"><i class="fa fa-dashboard"></i> Accueil</a></li>
+                <li class="active">Membres</li>
+            </ol>
+        </section>
+        {% include "admin/inc/success_error.html" %}
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="box box-danger">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">LISTE MEMBRES</h3>
+
+                            <div class="box-tools pull-right">
+                                <span class="label label-danger">{{ users | length }} Membres</span>
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body no-padding" style="">
+                            <ul class="users-list clearfix">
+                                {% for user in users %}
+                                    <li>
+                                        <img src="{{ url_for('static',filename=user.photo) }}" alt="{{ user.name }}">
+                                        <a class="users-list-name" href="{{ url_for('admin.edit_user',uid=user.uid) }}">{{ user.name }}</a>
+                                        <span class="users-list-date">{{ user.email }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <!-- /.users-list -->
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-md-7">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">EDITION D'UN MEMBRE</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            {% include 'admin/users/form.html' %}
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}

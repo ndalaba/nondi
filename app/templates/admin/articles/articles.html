@@ -47,7 +47,7 @@
                                         </select>
                                         <select name="top" class="form-control">
                                             <option value="">position</option>
-                                            <option value="1"> {% if request.args.get('top') == '1' %} selected {% endif %}Une</option>
+                                            <option value="1" {% if request.args.get('top') == '1' %} selected {% endif %}>Une</option>
                                             <option value="0" {% if request.args.get('top') == '0' %} selected {% endif %}>Normale</option>
                                         </select>
                                         <select name="category" id="category" class="form-control">
@@ -109,6 +109,16 @@
                                         </tbody>
                                     </table>
                                 </div>
+                            </div>
+                            <div class="box-footer clearfix">
+                                <ul class="pagination pagination-sm no-margin pull-right">
+                                    {% if prev_url %}
+                                        <li><a href="{{ prev_url }}">«</a></li>
+                                    {% endif %}
+                                    {% if next_url %}
+                                        <li><a href="{{ next_url }}">»</a></li>
+                                    {% endif %}
+                                </ul>
                             </div>
                         </div>
                     </div>

@@ -29,7 +29,7 @@ def add_person():
             if form.image.data:
                 image = uploadImage(form.image.data, 'upload/persons/')
                 person.image = image
-            person.function = form.function.data
+            person.fonction = form.fonction.data
             person.content = form.content.data
             person.published = form.published.data
             Repository.save(person)
@@ -57,7 +57,7 @@ def edit_person(uid):
             person.name = form.name.data
             slug_title = slugify(form.name.data)
             person.slug = slug_title
-            person.function = form.function.data
+            person.fonction = form.fonction.data
             person.content = form.content.data
             person.published = form.published.data
             Repository.save(person)

@@ -43,6 +43,11 @@ class User(Entity, UserMixin, db.Model):
     def __repr__(self):
         return "User: {}".format(self.name)
 
+    def __init__(self, name, email):
+        Entity.__init__(self)
+        self.email = email
+        self.name = name
+
 
 @login_manager.user_loader
 def load_user(user_id):

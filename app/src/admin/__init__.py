@@ -1,7 +1,8 @@
 from flask import Blueprint
-from app.src.entity.Message import Message
 from flask_login import current_user
 from sqlalchemy import text
+
+from app.src.entity.Message import Message
 
 admin = Blueprint('admin', __name__)
 
@@ -12,10 +13,4 @@ def inject_mail():
     return dict(unread_mails=emails, email_count=len(emails))
 
 
-from . import profils
-from . import messages
-from . import categories
-from . import pages
-from . import videos
-from . import persons
-from . import articles
+from . import profils, messages, categories, pages, videos, persons, articles, users

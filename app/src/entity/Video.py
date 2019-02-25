@@ -10,7 +10,7 @@ class Video(Entity, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(190), nullable=False)
     slug = db.Column(db.String(190), nullable=False)
-    video = db.Column(db.String(50), nullable=False)
+    video = db.Column(db.String(190), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     description = db.Column(db.Text)

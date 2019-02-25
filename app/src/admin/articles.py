@@ -32,25 +32,27 @@ def articles():
 
     elif action == "Filtrer":
         title = request.args.get('title')
-        top = request.args.get('une')
+        top = request.args.get('top')
         published = request.args.get('published')
         category = request.args.get('category')
         query = Repository.query(Article)
         query = query.filter(Article.title.like('%' + title + '%')) if title is not None and title != "" else query
-        query = query.filter(Article.top == top) if top is not None and top.isnumeric() else query
-        query = query.filter(Article.published == published) if published is not None and published.isnumeric() else query
+        query = query.filter(Article.top == int(top)) if top is not None and top.isnumeric() else query
+        query = query.filter(Article.published == int(published)) if published is not None and published.isnumeric() else query
         query = query.filter(Article.category_id == category) if category is not None and category.isnumeric() else query
         if current_user.is_admin:
             articles = query.order_by(Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
         else:
             articles = query.filter_by(user_id=current_user.id).order_by(Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
+        next_url = url_for('admin.articles', page=articles.next_num, todo=9999, title=title, published=published, top=top, category=category, doaction='Filtrer') if articles.has_next else None
+        prev_url = url_for('admin.articles', page=articles.prev_num, todo=9999, title=title, published=published, top=top, category=category, doaction='Filtrer') if articles.has_prev else None
     else:
         if current_user.is_admin:
             articles = Article.query.order_by(Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
         else:
             articles = Article.query.filter_by(user_id=current_user.id).order_by(Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
-    next_url = url_for('admin.articles', page=articles.next_num) if articles.has_next else None
-    prev_url = url_for('admin.articles', page=articles.prev_num) if articles.has_prev else None
+        next_url = url_for('admin.articles', page=articles.next_num) if articles.has_next else None
+        prev_url = url_for('admin.articles', page=articles.prev_num) if articles.has_prev else None
     return render_template('admin/articles/articles.html', articles=articles.items, categories=categories, next_url=next_url, prev_url=prev_url)
 
 

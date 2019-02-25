@@ -35,7 +35,9 @@
                 <ul class="treeview-menu">
                     <li class="{% if request.path=='/admin/articles' %} active {% endif %}"><a href="{{url_for('admin.articles')}}"><i class="fa fa-circle-o"></i> Articles</a></li>
                     <li class="{% if request.path=='/admin/articles/add_article' %} active {% endif %}"><a href="{{url_for('admin.add_article')}}"><i class="fa fa-circle-o"></i> Nouvel article</a></li>
+                    {% if current_user.is_admin %}
                     <li class="{% if request.path=='/admin/categories' %} active {% endif %}"><a href="{{url_for('admin.categories')}}"><i class="fa fa-circle-o"></i> Catégories</a></li>
+                    {% endif %}
                 </ul>
             </li>
             <li class="treeview {% if request.path | startswith('/admin/videos') %} active {% endif %}">
@@ -60,7 +62,8 @@
                     <li class="{% if request.path=='/admin/persons' %} active {% endif %}"><a href="{{url_for('admin.persons')}}"><i class="fa fa-circle-o"></i> Personnes</a></li>
                 </ul>
             </li>
-            <li class="treeview {% if request.path | startswith('/admin/pages') %} active {% endif %}">
+            {% if current_user.is_admin %}
+                <li class="treeview {% if request.path | startswith('/admin/pages') %} active {% endif %}">
                 <a href="{{url_for('admin.pages')}}">
                     <i class="fa fa-file-o"></i> <span>Pages</span>
                     <span class="pull-right-container">
@@ -71,6 +74,7 @@
                     <li class="{% if request.path=='/admin/pages' %} active {% endif %}"><a href="{{url_for('admin.pages')}}"><i class="fa fa-circle-o"></i> Pages</a></li>
                 </ul>
             </li>
+            {% endif %}
             <li class="treeview {% if request.path | startswith('/admin/messages') %} active {% endif %}">
                 <a href="{{url_for('admin.messages')}}">
                     <i class="fa fa-envelope"></i> <span>Messages</span>
@@ -92,6 +96,19 @@
                 </ul>
             </li>
             <li class="header">LABELS</li>
+            {% if current_user.is_admin %}
+                <li class="treeview {% if request.path | startswith('/admin/pages') %} active {% endif %}">
+                    <a href="{{ url_for('admin.pages') }}">
+                        <i class="fa fa-user-md"></i> <span>Membres</span>
+                        <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="{% if request.path=='/admin/users' %} active {% endif %}"><a href="{{ url_for('admin.users') }}"><i class="fa fa-circle-o"></i> Membres</a></li>
+                    </ul>
+                </li>
+            {% endif %}
             <li class="{% if request.path=='/admin/profils' %} active {% endif %}"><a href="{{ url_for('admin.profil') }}"><i class="fa fa-user-circle"></i> <span>Profils</span></a></li>
         </ul>
     </section>

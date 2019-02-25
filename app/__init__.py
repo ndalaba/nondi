@@ -18,23 +18,23 @@ login_manager = LoginManager(app)
 login_manager.login_message = "Veillez vous connecter!"
 login_manager.login_view = "auth.login"
 
-from .entity.Article import Category, Article
-from .entity.Message import Message
-from .entity.Page import Page
-from .entity.Video import Video
-from .entity.User import User
-from .entity.Person import Person
+from app.src.entity.Article import Category, Article
+from app.src.entity.Message import Message
+from app.src.entity.Page import Page
+from app.src.entity.Video import Video
+from app.src.entity.User import User
+from app.src.entity.Person import Person
 
-from .admin import admin as admin_blueprint
+from app.src.admin import admin as admin_blueprint
 app.register_blueprint(admin_blueprint, url_prefix='/admin')
 
-from .auth import auth as auth_blueprint
+from app.src.auth import auth as auth_blueprint
 app.register_blueprint(auth_blueprint)
 
-from .front import front as front_blueprint
+from app.src.front import front as front_blueprint
 app.register_blueprint(front_blueprint)
 
 
-from app.utils.filter import datetimeformat, startswith
+from app.src.utils.filter import datetimeformat, startswith
 app.jinja_env.filters['datetimeformat'] = datetimeformat
 app.jinja_env.filters['startswith'] = startswith

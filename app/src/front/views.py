@@ -10,11 +10,7 @@ from app.src.entity.Message import Message
 
 @front.route('/')
 def index():
-
-    user = User.query.filter_by(uid='a6c5a240').first()
-
-    form = EmailForm()
-    return render_template('front/base.html', user=user)
+    return render_template('front/base.html')
 
 
 @front.route('/contact', methods=['POST'])

@@ -6,7 +6,9 @@ body{font-size: 15px}
 @media (max-width: 767px){
     .main-header .logo{display: none}
     .fixed .content-wrapper{padding-top: 50px}
+    .main-sidebar{padding-top: 50px;}
 }
 .content-header>h1{text-transform: uppercase;font-size: 20px}
 .content-header>.breadcrumb{text-transform: uppercase;}
 .skin-green .sidebar a{color: #b8c7ce}
+.main-footer {background: #ecf0f5; padding: 15px; color: #444; border-top: none; }

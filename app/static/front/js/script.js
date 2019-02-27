@@ -1,7 +1,11 @@
 jQuery(function ($) {
 
     'use strict';
-
+    setInterval(function () {
+        var event = new Date();
+        var options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+        $('#date_time').html(event.toLocaleTimeString('fr-FR', options))
+    }, 1000);
     // --------------------------------------------------------------------
     // Back to top
     // --------------------------------------------------------------------

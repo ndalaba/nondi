@@ -16,10 +16,11 @@ class User(Entity, UserMixin, db.Model):
     location = db.Column(db.String(150))
     email = db.Column(db.String(60), unique=True, index=True)
     phone = db.Column(db.String(20), unique=True)
-    role = db.Column(db.String(60))
+    role = db.Column(db.String(60), default="edition")
     password_hash = db.Column(db.String(130))
     photo = db.Column(db.String(130), unique=True)
     facebook = db.Column(db.String(150))
+    activated = db.Column(db.Boolean, default=False)
 
     articles = db.relationship('Article', back_populates="user")
     messages = db.relationship('Message', back_populates="user")

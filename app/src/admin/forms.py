@@ -7,10 +7,11 @@ from wtforms.validators import DataRequired, Email, URL
 class UserForm(Form):
     name = StringField('Nom et prénom', validators=[DataRequired('Veillez renseigner le champ nom et prénom')])
     email = StringField('Email',validators=[DataRequired('Veillez renseigner le champ email'), Email('Champ email incorrect')])
-    phone = StringField('Téléphone', validators=[DataRequired('Veillez renseigner le champ téléphone')])
+    phone = StringField('Téléphone')
     facebook = StringField('Facebook')
     location = TextAreaField('Adresse')
     photo = FileField('Photo', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    activated = BooleanField('Activé')
     submit = SubmitField('Valider')
 
 

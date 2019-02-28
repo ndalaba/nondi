@@ -25,3 +25,8 @@ class Video(Entity, db.Model):
         self.slug = slug
         self.user_id = user_id
         self.category_id = category_id
+
+    def get_video_id(self):
+        # https://www.youtube.com/watch?v=3NNJOQKnySk
+        return self.video[32:]
+

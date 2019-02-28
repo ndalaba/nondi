@@ -6,11 +6,13 @@ from .form import EmailForm
 from flask_mail import Message as Msg
 from app import mail
 from app.src.entity.Message import Message
+from app.src.entity.Video import  Video
 
 
 @front.route('/')
 def index():
-    return render_template('front/base.html')
+    videos = Video.query.order_by(Video.created_at.desc()).paginate(1, 6, False)
+    return render_template('front/home.html',videos=videos.items)
 
 
 @front.route('/contact', methods=['POST'])

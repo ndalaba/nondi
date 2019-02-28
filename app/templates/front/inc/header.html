@@ -35,7 +35,7 @@
 
                 <div class="col-md-3">
                     <div class="social_icon1">
-                        <a class="icons-sm fb-ic"><i class="fa fa-facebook"></i></a>
+                        <a class="icons-sm fb-ic" href="https://www.facebook.com/nondiguinee"><i class="fa fa-facebook"></i></a>
                         <!--Twitter-->
                         <a class="icons-sm tw-ic"><i class="fa fa-twitter"></i></a>
                         <!--Google +-->
@@ -63,21 +63,17 @@
             <div id="navbar" class="collapse navbar-collapse sidebar-offcanvas">
                 <ul class="nav navbar-nav">
                     <li class="hidden"><a href="#page-top"></a></li>
-                    <li><a class="page-scroll" href="category.html">Track &amp; Field</a></li>
-
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                        </ul>
-                    </li>
+                    <li><a class="page-scroll" href="{{ url_for('front.index') }}">Accueil</a></li>
+                    <li><a class="page-scroll" href="{{ url_for('front.index') }}" title="agir pour changer ce régime">Agir</a></li>
+                    <li><a class="page-scroll" href="{{ url_for('front.index') }}" title="Notre pays est en danger, changeons">Changeons</a></li>
+                    <li><a class="page-scroll" href="{{ url_for('front.index') }}" title="Actualité de la guinée">Actualités</a></li>
+                    <li><a class="page-scroll" href="{{ url_for('front.index') }}" title="de la communauté guinéenne">Blogs</a></li>
+                    <li><a class="page-scroll" href="{{ url_for('front.index') }}" title="Nous contacter">Nous contacter</a></li>
                 </ul>
                 <div class="pull-right">
                     <form class="navbar-form" role="search">
                         <div class="input-group">
-                            <input class="form-control" placeholder="Search" name="q" type="text">
+                            <input class="form-control" placeholder="Rechercher" name="q" type="text">
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>

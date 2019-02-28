@@ -4,7 +4,8 @@ jQuery(function ($) {
     setInterval(function () {
         var event = new Date();
         var options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-        $('#date_time').html(event.toLocaleTimeString('fr-FR', options))
+        $('#date_time').html(event.toLocaleTimeString('fr-FR', options));
+        $('#copyright_date').html(event.getFullYear());
     }, 1000);
     // --------------------------------------------------------------------
     // Back to top
@@ -20,7 +21,7 @@ jQuery(function ($) {
                 jQuery('.crunchify-top').fadeOut(duration);
             }
         });
- 
+
         jQuery('.crunchify-top').click(function(event) {
             event.preventDefault();
             jQuery('html, body').animate({scrollTop: 0}, duration);

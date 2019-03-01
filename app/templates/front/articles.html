@@ -1,0 +1,38 @@
+{% extends 'front/base.html' %}
+{% block title %} {{ category.title }} | Nondi Guinée{% endblock %}
+{% block content %}
+    <section id="feature_category_section" class="feature_category_section single-page section_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row">
+                        {% for article in articles %}
+                            <div class="col-md-6">
+                                <div class="feature_news_item">
+                                    <div class="item">
+                                        <div class="item_wrapper">
+                                            <div class="item_img" style="height: 250px; overflow: hidden">
+                                                <img class="img-responsive" src="{{ url_for('static',filename='upload/articles/'+article.image) }}" alt="{{ article.title }}">
+                                            </div> <!--item_img-->
+                                            <div class="item_title_date">
+                                                <div class="news_item_title">
+                                                    <h2><a href="{{ url_for('front.article',category=category.slug,slug=article.slug) }}" title="{{ article.title }}">{{ article.title }}</a></h2>
+                                                </div>
+                                                <div class="item_meta"><a href="{{ url_for('front.article',category=category.slug,slug=article.slug) }}">{{ article.created_at | datetimeformat }},</a> par: <a href="#">{{ article.user.name }}</a></div>
+                                            </div><!--item_title_date-->
+                                        </div> <!--item_wrapper-->
+                                        <div class="item_content">{{ article.get_extrait() | safe }} </div>
+                                    </div><!--item-->
+                                </div><!--feature_news_item-->
+                            </div><!--col-md-6-->
+                        {% endfor %}
+                    </div><!--row-->
+                </div>
+
+                <div class="col-md-3">
+                    {% include 'front/inc/sidebar.html' %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

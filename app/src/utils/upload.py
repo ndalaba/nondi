@@ -15,4 +15,4 @@ def uploadImage(image, path=''):
     im.thumbnail(size)
     im.save(image_path)
 
-    return path + filename
+    return filename

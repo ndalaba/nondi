@@ -1,6 +1,7 @@
 
 from app import db
 from app.src.entity.Entity import Entity
+from app.src.utils.str_helper import strip_tags
 
 
 class Category(Entity, db.Model):
@@ -32,6 +33,7 @@ class Article(Entity, db.Model):
     slug = db.Column(db.String(190), nullable=False)
     top = db.Column(db.Boolean, default=0)
     content = db.Column(db.Text)
+    extrait = db.column(db.Text)
     image = db.Column(db.String(190), default='upload/noimage.png')
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
@@ -46,3 +48,7 @@ class Article(Entity, db.Model):
         self.slug = slug
         self.user_id = user_id
         self.category_id = category_id
+        self.image = 'noimage.png'
+
+    def get_extrait(self, _len=100):
+        return strip_tags(self.content[0:_len])

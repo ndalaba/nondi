@@ -1,0 +1,119 @@
+<section id="feature_category_section" class="feature_category_section section_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="category_layout">
+                    <div class="item_caregory red"><h2><a href="{{ url_for('front.articles',cat_slug='actualites') }}">ACTUALITÉS</a></h2></div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            {% for art in article %}
+                                <div class="item feature_news_item">
+                                    <div class="item_wrapper">
+                                        <div class="item_img">
+                                            <img class="img-responsive" style="max-height: 375px;max-width: fit-content;" src="{{ url_for('static',filename='upload/articles/'+art.image) }}" alt="{{ art.title }}">
+                                        </div><!--item_img-->
+                                        <div class="item_title_date">
+                                            <div class="news_item_title">
+                                                <h2><a href="{{ url_for('front.article',category=art.category.slug, slug=art.slug) }}" title="{{ art.title }}">{{ art.title }}</a></h2>
+                                            </div><!--news_item_title-->
+                                             <div class="item_meta"><a href="{{ url_for('front.article',category=art.category.slug, slug=art.slug) }}" title="{{ art.title }}">{{ art.created_at | datetimeformat }}</a> par <a href="#">{{ art.user.name }}</a></div>
+                                        </div><!--item_title_date-->
+                                    </div><!--item_wrapper-->
+                                    <div class="item_content">{{ art.get_extrait(200) | safe }}.</div><!--item_content-->
+                                </div><!--feature_news_item-->
+                            {% endfor %}
+                        </div><!--col-md-7-->
+
+                        <div class="col-md-5">
+                            <div class="media_wrapper">
+                                {% for article in articles %}
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="{{ url_for('front.article',category=article.category.slug, slug=article.slug) }}" style="width: 80px; height: 80px;overflow: hidden;display: inline-block;"><img class="media-object" style="height: 80px" src="{{ url_for('static',filename='upload/articles/'+article.image) }}" alt="{{ article.title }}"></a>
+                                        </div><!--media-left-->
+                                        <div class="media-body">
+                                            <h3 class="media-heading"><a href="{{ url_for('front.article',category=article.category.slug, slug=article.slug) }}" title="{{ article.title }}">{{ article.title }}  </a></h3>
+                                            {#<div>{{ article.get_extrait() | safe }}.</div>#}
+                                        </div><!--media-body-->
+                                    </div><!--media-->
+                                {% endfor %}
+                            </div><!--media_wrapper-->
+
+                        </div><!--col-md-5-->
+                    </div><!--row-->
+                </div><!--category_layout-->
+                <div class="category_layout">
+                    <div class="item_caregory blue"><h2><a href="{{ url_for('front.articles',cat_slug='opinions') }}">OPINIONS</a></h2></div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            {% for art in blog %}
+                                <div class="item feature_news_item">
+                                    <div class="item_wrapper">
+                                        <div class="item_img">
+                                            <img class="img-responsive" style="max-height: 375px;max-width: fit-content;" src="{{ url_for('static',filename='upload/articles/'+art.image) }}" alt="{{ art.title }}">
+                                        </div><!--item_img-->
+                                        <div class="item_title_date">
+                                            <div class="news_item_title">
+                                                <h2><a href="{{ url_for('front.article',category=art.category.slug, slug=art.slug) }}" title="{{ art.title }}">{{ art.title }}</a></h2>
+                                            </div><!--news_item_title-->
+                                            <div class="item_meta"><a href="{{ url_for('front.article',category=art.category.slug, slug=art.slug) }}" title="{{ art.title }}">{{ art.created_at | datetimeformat }}</a> par <a href="#">{{ art.user.name }}</a></div>
+                                        </div><!--item_title_date-->
+                                    </div><!--item_wrapper-->
+                                    <div class="item_content">{{ art.get_extrait(200) | safe }}.</div><!--item_content-->
+                                </div><!--feature_news_item-->
+                            {% endfor %}
+                        </div><!--col-md-7-->
+
+                        <div class="col-md-5">
+                            <div class="media_wrapper">
+                                {% for article in blogs %}
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="{{ url_for('front.article',category=article.category.slug, slug=article.slug) }}" style="width: 80px; height: 80px;overflow: hidden;display: inline-block;"><img class="media-object" style="height: 80px" src="{{ url_for('static',filename='upload/articles/'+article.image) }}" alt="{{ article.title }}"></a>
+                                        </div><!--media-left-->
+                                        <div class="media-body">
+                                            <h3 class="media-heading"><a href="{{ url_for('front.article',category=article.category.slug, slug=article.slug) }}" title="{{ article.title }}">{{ article.title }}  </a></h3>
+                                            {#<div>{{ article.get_extrait() | safe }}.</div>#}
+                                        </div><!--media-body-->
+                                    </div><!--media-->
+                                {% endfor %}
+                            </div><!--media_wrapper-->
+
+                        </div><!--col-md-5-->
+                    </div><!--row-->
+                </div><!--category_layout-->
+                <div id="more_news_item" class="more_news_item">
+                    <div class="more_news_heading"><h2><a href="{{ url_for('front.articles',cat_slug='divers') }}">Faits Divers</a></h2></div>
+                    <div class="row">
+                        {% for article in divers %}
+                            <div class="col-md-4">
+                                <div class="feature_news_item">
+                                    <div class="item active">
+                                        <div class="item_wrapper">
+                                            <div class="item_img" style="height: 177px; overflow: hidden">
+                                                <img class="img-responsive" src="{{ url_for('static',filename='upload/articles/'+article.image) }}" alt="{{ article.title }}">
+                                            </div><!--item_img-->
+                                            <div class="item_title_date">
+                                                <div class="news_item_title">
+                                                    <h3><a href="{{ url_for('front.article',category=article.category.slug, slug=article.slug) }}" title="{{ article.title }}">{{ article.title }}</a></h3>
+                                                </div><!--news_item_title-->
+                                                <div class="item_meta"><a href="#">{{ article.created_at | datetimeformat }},</a> par:<a href="#">{{ article.user.name }}</a></div>
+                                            </div><!--item_title_date-->
+                                        </div><!--item_wrapper-->
+                                        <div class="item_content" style="height: 100px">{{ article.get_extrait(150) | safe }}</div><!--item_content-->
+
+                                    </div><!--item-->
+                                </div><!--feature_news_item-->
+                            </div><!--col-xs-4-->
+                        {% endfor %}
+
+                    </div><!--row-->
+                </div>
+            </div><!--col-md-9-->
+
+            <div class="col-md-3">
+                {% include "front/inc/sidebar.html" %}
+            </div>
+        </div>
+    </div>
+</section>

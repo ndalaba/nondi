@@ -19,7 +19,7 @@ class User(Entity, UserMixin, db.Model):
     role = db.Column(db.String(60), default="edition")
     password_hash = db.Column(db.String(130))
     photo = db.Column(db.String(130), unique=True)
-    facebook = db.Column(db.String(150))
+    facebook = db.Column(db.String(190))
     activated = db.Column(db.Boolean, default=False)
 
     articles = db.relationship('Article', back_populates="user")

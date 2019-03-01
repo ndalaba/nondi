@@ -1,0 +1,79 @@
+{% extends 'front/base.html' %}
+{% block title %} {{ article.title }} | Nondi Guinée{% endblock %}
+{% block content %}
+    <section id="feature_category_section" class="feature_category_section single-page section_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="single_content_layout">
+                        {% if article is not none %}
+                            <div class="item feature_news_item">
+                                <div class="item_img">
+                                    <img class="img-responsive" src="{{ url_for('static',filename='upload/articles/'+article.image) }}" alt="{{ article.title }}">
+                                </div><!--item_img-->
+                                <div class="item_wrapper">
+                                    <div class="news_item_title">
+                                        <h2><a href="#">{{ article.title }}</a></h2>
+                                    </div><!--news_item_title-->
+                                    <div class="item_meta"><a href="#">{{ article.created_at | datetimeformat }}</a> par:<a href="#">{{ article.user.name }}</a></div>
+
+                                    <div class="single_social_icon">
+                                        <a class="icons-sm fb-ic" href="#"><i class="fa fa-facebook"></i><span>Facebook</span></a>
+                                        <!--Twitter-->
+                                        <a class="icons-sm tw-ic" href="#"><i class="fa fa-twitter"></i><span>Twitter</span></a>
+                                        <!--Google +-->
+                                        <a class="icons-sm gplus-ic" href="#"><i class="fa fa-google-plus"></i><span>Google Plus</span></a>
+                                        <!--Linkedin-->
+                                        <a class="icons-sm li-ic" href="#"><i class="fa fa-linkedin"></i><span>Linkedin</span></a>
+
+                                    </div> <!--social_icon1-->
+
+                                    <div class="item_content">
+                                        {{ article.content | safe }}
+                                    </div><!--item_content-->
+
+                                </div><!--item_wrapper-->
+                            </div><!--feature_news_item-->
+                        {% else %}
+                            <h1 style="color:#000;text-align: center;margin: 14px 0;font-size: 40px;">Oups ... Erreur 404</h1>
+                            <h2 style="text-align: center;margin-bottom: 14px;color: #4d4f50;">Désolé, mais la page que vous recherchez n'existe pas.</h2>
+                        {% endif %}
+                        <div class="single_related_news">
+                            <div class="single_media_title"><h2>À lire aussi</h2></div>
+                            <div class="media_wrapper">
+
+                                {% for article in articles %}
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="{{ url_for('front.article',category=article.category.slug, slug=article.slug) }}">
+                                                <img class="media-object" style="width: 80px" src="{{ url_for('static',filename='upload/articles/'+article.image) }}" alt="{{ article.title }}">
+                                            </a>
+                                        </div><!--media-left-->
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><a href="{{ url_for('front.article',category=article.category.slug, slug=article.slug) }}" title="{{ article.title }}">{{ article.title }}</a></h4>
+                                            <div class="media_meta"><a href="{{ url_for('front.article',category=article.category.slug, slug=article.slug) }}">{{ article.created_at | datetimeformat }}</a> par:<a href="#">{{ article.user.name }}</a></div>
+                                            <div class="media_content">
+                                                {{ article.get_extrait(250) | safe }}
+                                            </div><!--media_content-->
+                                        </div><!--media-body-->
+                                    </div><!--media-->
+                                {% endfor %}
+                            </div><!--media_wrapper-->
+                        </div><!--single_related_news-->
+
+
+                        <div class="ad">
+                            <img class="img-responsive" src="{{ url_for('static',filename='front/images/img-single-ad.jpg') }}" alt="Chania">
+                        </div>
+
+
+                    </div><!--single_content_layout-->
+                </div>
+
+                <div class="col-md-3">
+                    {% include 'front/inc/sidebar.html' %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

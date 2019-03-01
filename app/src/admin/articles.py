@@ -9,7 +9,7 @@ from . import admin
 from .forms import Article as ArticleForm
 
 
-@admin.route('/articles', methods=['POST', 'GET'])
+@admin.route('/articles', methods=['GET'])
 @login_required
 def articles():
     categories = Category.query.all()

@@ -31,7 +31,7 @@ class Article(Form):
     title = StringField('Titre', validators=[DataRequired('Veillez renseigner le titre de l\'article')])
     top = BooleanField('À la une')
     category = SelectField('Catégorie', coerce=int, validators=[DataRequired()])
-    extrait = TextAreaField('Extrait', validators=[DataRequired('Veillez renseigner le champ extrait')])
+    content_extrait = TextAreaField('Extrait', validators=[DataRequired('Veillez renseigner le champ extrait')])
     content = TextAreaField('Contenu')
     image = FileField('Image', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     published = BooleanField('Publié')

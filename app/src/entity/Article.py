@@ -26,14 +26,14 @@ class Category(Entity, db.Model):
 class Article(Entity, db.Model):
     __tablename__ = "articles"
 
-    POSTS_PER_PAGE = 13
+    POSTS_PER_PAGE = 14
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(190), nullable=False)
     slug = db.Column(db.String(190), nullable=False)
     top = db.Column(db.Boolean, default=0)
     content = db.Column(db.Text)
-    extrait = db.column(db.Text)
+    content_extrait = db.column(db.Text)
     image = db.Column(db.String(190), default='upload/noimage.png')
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))

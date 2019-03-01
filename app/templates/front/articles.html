@@ -1,7 +1,7 @@
 {% extends 'front/base.html' %}
 {% block title %} {{ category.title }} | Nondi Guinée{% endblock %}
 {% block content %}
-    <section id="feature_category_section" class="feature_category_section single-page section_wrapper">
+    <section id="feature_category_section" class="feature_category_section category_page section_wrapper">
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
@@ -21,13 +21,22 @@
                                                 <div class="item_meta"><a href="{{ url_for('front.article',category=category.slug,slug=article.slug) }}">{{ article.created_at | datetimeformat }},</a> par: <a href="#">{{ article.user.name }}</a></div>
                                             </div><!--item_title_date-->
                                         </div> <!--item_wrapper-->
-                                        <div class="item_content">{{ article.get_extrait() | safe }} </div>
+                                        {#<div class="item_content" style="height: 100px">{{ article.get_extrait() | safe }} </div> #}
                                     </div><!--item-->
                                 </div><!--feature_news_item-->
                             </div><!--col-md-6-->
                         {% endfor %}
                     </div><!--row-->
-                </div>
+
+                <ul class="pagination pagination-sm no-margin pull-right">
+                                    {% if prev_url %}
+                                        <li><a href="{{ prev_url }}" style="margin:5px;font-size: 15px;">«</a></li>
+                                    {% endif %}
+                                    {% if next_url %}
+                                        <li><a href="{{ next_url }}" style="margin:5px;font-size: 15px;">»</a></li>
+                                    {% endif %}
+                                </ul>
+                </div><!--col-md-9-->
 
                 <div class="col-md-3">
                     {% include 'front/inc/sidebar.html' %}

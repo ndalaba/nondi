@@ -37,7 +37,7 @@
                                 {% for category in categories %}
                                     <tr>
                                         <td>
-                                            <a href="#" title="{{ category.title }}">{{ category.title }}</a>
+                                            <a href="{{ url_for('front.articles',cat_slug=category.slug) }}" target="_blank" title="{{ category.title }}">{{ category.title }}</a>
                                         </td>
                                     <td>{{ category.slug }}</td>
 

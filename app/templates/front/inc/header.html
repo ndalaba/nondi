@@ -64,11 +64,18 @@
                 <ul class="nav navbar-nav">
                     <li class="hidden"><a href="#page-top"></a></li>
                     <li><a class="page-scroll" href="{{ url_for('front.index') }}">Accueil</a></li>
-                    <li><a class="page-scroll" href="{{ url_for('front.index') }}" title="agir pour changer ce régime">Agir</a></li>
-                    <li><a class="page-scroll" href="{{ url_for('front.index') }}" title="Notre pays est en danger, changeons">Changeons</a></li>
-                    <li><a class="page-scroll" href="{{ url_for('front.index') }}" title="Actualité de la guinée">Actualités</a></li>
-                    <li><a class="page-scroll" href="{{ url_for('front.index') }}" title="de la communauté guinéenne">Blogs</a></li>
-                    <li><a class="page-scroll" href="{{ url_for('front.index') }}" title="Nous contacter">Nous contacter</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">DOSSIERS <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('front.articles',cat_slug='actualites') }}">ACTUALITES</a></li>
+                            <li><a href="{{ url_for('front.articles',cat_slug='opinions') }}">OPINIONS</a></li>
+                            <li><a href="{{ url_for('front.articles',cat_slug='divers') }}">FAITS DIVERS</a></li>
+                        </ul>
+                    </li>
+                    {% for page in pages %}
+                        <li><a class="page-scroll" href="{{ url_for('front.page',slug=page.slug) }}" title="{{ page.title }}">{{ page.title }}</a></li>
+                    {% endfor %}
+                    <li><a class="page-scroll" href="{{ url_for('front.contact') }}" title="Nous contacter">Nous contacter</a></li>
                 </ul>
                 <div class="pull-right">
                     <form class="navbar-form" role="search">

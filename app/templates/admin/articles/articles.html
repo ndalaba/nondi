@@ -78,7 +78,7 @@
                                             <tr>
                                                 <td><input type="checkbox" name="uid" value="{{ article.uid }}"/></td>
                                                 <td>
-                                                    <a href="{{ article.url }}" target="_blank" title="{{ article.title }}">{{ article.title }}</a>
+                                                    <a href="{{ url_for('front.article',category=article.category.slug,slug=article.slug) }}" target="_blank" title="{{ article.title }}">{{ article.title }}</a>
                                                 </td>
                                                 <td>{{ article.category.title }}</td>
                                                 <td>{{ article.vue }}</td>

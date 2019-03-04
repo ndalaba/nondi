@@ -1,0 +1,59 @@
+{% extends 'front/base.html' %}
+{% block title %} {{ person.name }} | Nondi Guinée{% endblock %}
+{% block content %}
+    <section id="feature_category_section" class="feature_category_section category_page section_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="feature_news_item category_item">
+                                <div class="item">
+                                    <div class="item_wrapper">
+                                        <div class="item_img">
+                                            <img class="img-responsive" src="{{ url_for('static',filename='upload/persons/'+person.image) }}" alt="{{ person.name }}">
+                                        </div><!--item_img-->
+                                        <div class="item_title_date">
+                                            <div class="news_item_title">
+                                                <h1><a href="#">{{ person.name }}</a></h1>
+                                            </div><!--news_item_title-->
+                                            <div class="item_meta">{{ person.fonction }}</div>
+                                        </div><!--item_title_date-->
+                                    </div><!--item_wrapper-->
+                                    <div class="item_content">
+                                        {{ person.content | safe }}
+                                    </div><!--item_content-->
+
+                                </div><!--item-->
+                            </div><!--feature_news_item-->
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% for person in persons %}
+                            <div class="col-md-6">
+                                <div class="feature_news_item">
+                                    <div class="item">
+                                        <div class="item_wrapper">
+                                            <div class="item_img" style="height: 250px; overflow: hidden">
+                                                <img class="img-responsive" src="{{ url_for('static',filename='upload/persons/'+person.image) }}" alt="{{ person.name }}">
+                                            </div> <!--item_img-->
+                                            <div class="item_title_date">
+                                                <div class="news_item_title">
+                                                    <h2><a href="{{ url_for('front.persons',slug=person.slug) }}" title="{{ person.name }}">{{ person.name }}</a></h2>
+                                                </div>
+                                            </div><!--item_title_date-->
+                                        </div> <!--item_wrapper-->
+                                        <div class="item_meta">{{ person.fonction }}</div>
+                                    </div><!--item-->
+                                </div><!--feature_news_item-->
+                            </div><!--col-md-6-->
+                        {% endfor %}
+                    </div><!--row-->
+                </div>
+                <div class="col-md-3">
+                    {% include 'front/inc/sidebar.html' %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

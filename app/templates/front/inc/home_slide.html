@@ -62,7 +62,7 @@
                                             </div> <!--item_img-->
                                             <div class="item_title_date">
                                                 <div class="news_item_title">
-                                                    <h2><a href="{{ url_for('static',filename='front/file/constitution.pdf') }}" target="_blank" title="Constitution de la Guinée">TOUCHE PAS À MA CONSTITUTION.</a></h2>
+                                                    <h2><a href="{{ url_for('static',filename='front/files/constitution.pdf') }}" target="_blank" title="Constitution de la Guinée">TOUCHE PAS À MA CONSTITUTION.</a></h2>
                                                 </div>
                                             </div><!--item_title_date-->
                                         </div> <!--item_wrapper-->
@@ -77,15 +77,15 @@
                                     <div class="item active">
                                         <div class="item_wrapper">
                                             <div class="item_img">
-                                                <img class="img-responsive" src="{{ url_for('static',filename='front/images/kaporo.jpg') }}" alt="Destruction maison Kaporo Rail">
+                                                <img class="img-responsive" src="{{ url_for('static',filename='upload/articles/'+top.image) }}" alt="{{ top.title }}">
                                             </div> <!--item_img-->
                                             <div class="item_title_date">
                                                 <div class="news_item_title">
-                                                    <h2><a href="#">CASSE ET DESTRUCTION.</a></h2>
+                                                    <h2><a href="{{ url_for('front.article',category=top.category.slug,slug=top.slug) }}">{{ top.title }}</a></h2>
                                                 </div>
                                             </div><!--item_title_date-->
                                         </div> <!--item_wrapper-->
-                                        <div class="item_content">Vous et votre gouvernement ne savez faire que çà à votre pauvre population. </div>
+                                        <div class="item_content">{{ top.get_extrait(200) | safe }} </div>
 
                                     </div><!--item-->
                                 </div><!--feature_news_item-->

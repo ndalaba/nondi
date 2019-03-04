@@ -1,0 +1,65 @@
+{% extends 'front/base.html' %}
+{% block title %} {{ video.title }} | Nondi Guinée{% endblock %}
+{% block content %}
+    <section id="feature_category_section" class="feature_category_section category_page section_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="feature_news_item category_item">
+                                <div class="item">
+                                    <div class="item_wrapper">
+                                        <div class="item_img">
+                                            <iframe height="500px" style="width: 100%" src="https://www.youtube.com/embed/{{ video.get_video_id() }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        </div><!--item_img-->
+                                        <div class="item_title_date" style="position: initial">
+                                            <div class="news_item_title">
+                                                <h1><a href="#">{{ video.title }}</a></h1>
+                                            </div><!--news_item_title-->
+                                        </div><!--item_title_date-->
+                                    </div><!--item_wrapper-->
+                                    <div class="item_content">
+                                        {{ video.description | safe }}
+                                    </div><!--item_content-->
+
+                                </div><!--item-->
+                            </div><!--feature_news_item-->
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% for video in videos %}
+                            <div class="col-md-6">
+                                <div class="feature_news_item">
+                                    <div class="item">
+                                        <div class="item_wrapper">
+                                            <div class="item_img" style="height: 250px; overflow: hidden">
+                                                <img class="img-responsive" src="https://img.youtube.com/vi/{{ video.get_video_id() }}/mqdefault.jpg" alt="{{ video.title }}">
+                                            </div> <!--item_img-->
+                                            <div class="item_title_date">
+                                                <div class="news_item_title">
+                                                    <h2><a href="{{ url_for('front.videos',slug=video.slug) }}" title="{{ video.title }}">{{ video.title }}</a></h2>
+                                                </div>
+                                            </div><!--item_title_date-->
+                                        </div> <!--item_wrapper-->
+                                    </div><!--item-->
+                                </div><!--feature_news_item-->
+                            </div><!--col-md-6-->
+                        {% endfor %}
+                        <ul class="pagination pagination-sm no-margin pull-right">
+                            {% if prev_url %}
+                                <li><a href="{{ prev_url }}" style="margin:5px;font-size: 15px;">«</a></li>
+                            {% endif %}
+                            {% if next_url %}
+                                <li><a href="{{ next_url }}" style="margin:5px;font-size: 15px;">»</a></li>
+                            {% endif %}
+                        </ul>
+                    </div><!--col-md-9-->
+                </div><!--row-->
+                <div class="col-md-3">
+                    {% include 'front/inc/sidebar.html' %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

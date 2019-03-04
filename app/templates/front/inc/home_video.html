@@ -10,8 +10,8 @@
                             <div class="item">
                                 <div class="video_thumb"><img src="https://img.youtube.com/vi/{{ video.get_video_id() }}/mqdefault.jpg" alt="{{ video.title }}"></div>
                                 <div class="video_info">
-                                    <div class="video_item_title"><h3><a href="#">{{ video.title }}</a></h3></div><!--video_item_title-->
-                                    <div class="item_meta"><a href="#">{{ video.created_at | datetimeformat('%d/%m/%Y') }}</a></div><!--item_meta-->
+                                    <div class="video_item_title"><h3><a href="{{ url_for('front.videos',slug=video.slug) }}" title="{{ video.title }}">{{ video.title }}</a></h3></div><!--video_item_title-->
+                                    <div class="item_meta"><a href="{{ url_for('front.videos',slug=video.slug) }}">{{ video.created_at | datetimeformat('%d/%m/%Y') }}</a></div><!--item_meta-->
                                 </div><!--video_info-->
                             </div>
                         {% endfor %}

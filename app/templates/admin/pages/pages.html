@@ -37,10 +37,10 @@
                                 {% for page in pages %}
                                     <tr>
                                     <td>
-                                        <a href="{{ page.url }}" target="_blank" title="{{ page.title }}">{{ page.title }}</a>
+                                        <a href="{{ url_for('front.page',slug=page.slug) }}" target="_blank" title="{{ page.title }}">{{ page.title }}</a>
 
                                         </td>
-                                        <td><a href="{{url_for('static',filename=page.image)}}" target="_blank"><img width="50px" src="{{url_for('static',filename=page.image)}}" alt="{{ page.title }}"></a></td>
+                                        <td><a href="{{url_for('static',filename=page.image)}}" target="_blank"><img width="50px" src="{{url_for('static',filename='upload/pages/'+page.image)}}" alt="{{ page.title }}"></a></td>
                                         {% if page.published %}
                                             <td>
                                                 <span class="label label-success">Publié</span>

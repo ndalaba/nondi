@@ -13,4 +13,4 @@ def inject_mail():
     return dict(unread_mails=emails, email_count=len(emails))
 
 
-from . import profils, messages, categories, pages, videos, persons, articles, users
+from . import profils, messages, categories, pages, videos, persons, articles, users,views

@@ -4,7 +4,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{url_for('static',filename=current_user.photo)}}" class="img-circle" alt="{{current_user.name}}">
+                <img src="{{ url_for('static',filename='upload/users/'+current_user.photo) }}" class="img-circle" alt="{{ current_user.name }}">
             </div>
             <div class="pull-left info">
                 <p>{{current_user.name}}</p>
@@ -51,18 +51,19 @@
                     <li class="{% if request.path=='/admin/videos' %} active {% endif %}"><a href="{{url_for('admin.videos')}}"><i class="fa fa-circle-o"></i> Vidéos</a></li>
                 </ul>
             </li>
-            <li class="treeview {% if request.path | startswith('/admin/persons') %} active {% endif %}">
-                <a href="{{url_for('admin.persons')}}">
-                    <i class="fa fa-user-secret"></i> <span>Personnes</span>
-                    <span class="pull-right-container">
+
+            {% if current_user.is_admin %}
+                <li class="treeview {% if request.path | startswith('/admin/persons') %} active {% endif %}">
+                    <a href="{{ url_for('admin.persons') }}">
+                        <i class="fa fa-user-secret"></i> <span>Personnes</span>
+                        <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{% if request.path=='/admin/persons' %} active {% endif %}"><a href="{{url_for('admin.persons')}}"><i class="fa fa-circle-o"></i> Personnes</a></li>
-                </ul>
-            </li>
-            {% if current_user.is_admin %}
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="{% if request.path=='/admin/persons' %} active {% endif %}"><a href="{{ url_for('admin.persons') }}"><i class="fa fa-circle-o"></i> Personnes</a></li>
+                    </ul>
+                </li>
                 <li class="treeview {% if request.path | startswith('/admin/pages') %} active {% endif %}">
                 <a href="{{url_for('admin.pages')}}">
                     <i class="fa fa-file-o"></i> <span>Pages</span>
@@ -97,7 +98,7 @@
             </li>
             <li class="header">LABELS</li>
             {% if current_user.is_admin %}
-                <li class="treeview {% if request.path | startswith('/admin/pages') %} active {% endif %}">
+                <li class="treeview {% if request.path | startswith('/admin/users') %} active {% endif %}">
                     <a href="{{ url_for('admin.pages') }}">
                         <i class="fa fa-user-md"></i> <span>Membres</span>
                         <span class="pull-right-container">

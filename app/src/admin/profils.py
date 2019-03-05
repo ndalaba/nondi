@@ -7,14 +7,6 @@ from app.src.utils.upload import uploadImage
 from . import admin
 
 
-@admin.route('/home')
-@admin.route('/')
-@login_required
-def home():
-    return redirect(url_for('admin.profil'))
-    #return render_template('admin/home.html',page='dashboard')
-
-
 @admin.route('/profils')
 def profil():
     form = UserForm(obj=current_user)

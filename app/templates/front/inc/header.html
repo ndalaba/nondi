@@ -11,7 +11,7 @@
                         <div class="top-menu">
                             <ul class="nav navbar-nav">
                                 <li><a href="{{ url_for('auth.login') }}">Se connecter</a></li>
-                                <li><a href="#">S'enregistrer</a></li>
+                                <li><a href="{{ url_for('front.register') }}">S'enregistrer</a></li>
                             </ul>
                         </div><!--top-menu-->
                     </div><!--top_ber_left-->
@@ -29,7 +29,7 @@
 
                 <div class="col-md-6">
                     <div class="header_ad_banner">
-                        <a href="#"><img class="img-responsive" src="{{ url_for('static',filename='front/images/img_ad.jpg') }}" alt=""></a>
+                        <a href="http://www.leblocliberal.org/" title="le bloc libéral" target="_blank"><img style="height: 70px" class="img-responsive" src="{{ url_for('static',filename='front/images/bl.jpg') }}" alt="Le bloc libéral"></a>
                     </div>
                 </div><!--col-md-6-->
 
@@ -78,7 +78,7 @@
                     <li><a class="page-scroll" href="{{ url_for('front.contact') }}" title="Nous contacter">Nous contacter</a></li>
                 </ul>
                 <div class="pull-right">
-                    <form class="navbar-form" role="search">
+                    <form class="navbar-form" role="search" action="{{ url_for('front.rechercher') }}">
                         <div class="input-group">
                             <input class="form-control" placeholder="Rechercher" name="q" type="text">
                             <div class="input-group-btn">

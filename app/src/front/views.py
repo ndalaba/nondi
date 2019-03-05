@@ -10,7 +10,8 @@ from app.src.entity.User import User
 from app.src.entity.Video import Video
 from app.src.repository.Repository import Repository
 from . import front
-from .form import EmailForm
+from .form import EmailForm, UserForm
+from sqlalchemy import text
 
 
 @front.route('/')
@@ -25,6 +26,16 @@ def index():
     return render_template('front/home.html', videos=videos.items, blog=blog.items, blogs=blogs.items, articles=articles.items, article=article.items, divers=divers.items, top=top.items[0])
 
 
+@front.route('/rechercher')
+def rechercher():
+    page = request.args.get('page', 1, type=int)
+    q = request.args.get('q', "", type=str)
+    articles = Article.query.filter(text("articles.published=1 AND LOWER(articles.title) LIKE LOWER('%"+q+"%')")).order_by(Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
+    next_url = url_for('front.rechercher', page=articles.next_num, q=q) if articles.has_next else None
+    prev_url = url_for('front.rechercher', page=articles.prev_num, q=q) if articles.has_prev else None
+    return render_template('front/articles.html', articles=articles.items, next_url=next_url, prev_url=prev_url, q=q)
+
+
 @front.route('/videos/<slug>')
 def videos(slug):
     page = request.args.get('page', 1, type=int)
@@ -33,7 +44,7 @@ def videos(slug):
         videos = Video.query.filter(Video.published == True, Video.id != video.id).order_by(Video.created_at.desc()).paginate(page, 6, False)
         next_url = url_for('front.videos', page=videos.next_num, slug=slug) if videos.has_next else None
         prev_url = url_for('front.videos', page=videos.prev_num, slug=slug) if videos.has_prev else None
-        return render_template('front/videos.html', video=video, videos=videos.items, next_url=next_url, prev_url=prev_url)
+        return render_template('front/videos.html', video=video, videos=videos.items, next_url=next_url, prev_url=prev_url, page=page)
     else:
         return redirect(url_for('front.article', category=slug, slug=slug))
 
@@ -105,3 +116,28 @@ def contact():
         return jsonify(type="error", text="Erreur formulaire.")
     else:
         return render_template('front/contact.html')
+
+
+@front.route('/s-enregistrer', methods=['POST', 'GET'])
+def register():
+    form = UserForm()
+    if request.method == 'POST':
+        if form.is_submitted():
+            user = User.query.filter_by(email=form.email.data).first()
+            if user is not None:
+                return jsonify(type="error", text="Adresse email déjà utilisée, Veillez vous connecter")
+            user = User.query.filter_by(phone=form.phone.data).first()
+            if user is not None:
+                return jsonify(type="error", text="Numéro de téléphone déjà utilisée, Veillez vous connecter")
+            user = User(name=form.name.data, email=form.email.data)
+            user.facebook = form.facebook.data
+            user.phone = form.phone.data
+            user.password = form.password.data
+            user.photo = 'no-image.png'
+            user.role = "editeur"
+            user.activated = False
+            Repository.save(user)
+            return jsonify(type="success", text="Votre compte est en attente de validation")
+        return jsonify(type="error", text="Erreur formulaire.")
+    else:
+        return render_template('front/register.html')

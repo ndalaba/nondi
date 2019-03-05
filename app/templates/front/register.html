@@ -1,5 +1,5 @@
 {% extends 'front/base.html' %}
-{% block title %} Nous contacter | Nondi Guinée{% endblock %}
+{% block title %} S'inscrire | Nondi Guinée{% endblock %}
 {% block content %}
     <section id="feature_category_section" class="feature_category_section category_page section_wrapper">
         <div class="container">
@@ -10,32 +10,30 @@
                             <div class="feature_news_item category_item">
                                 <div class="item">
                                     <div class="item_wrapper">
-                                        <div class="item_img">
-                                            <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2782.460583176302!2d-13.718300087649387!3d9.509293942891132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xf1cd09a07a31443%3A0x38fe8df2bbbf205c!2sPalais+pr%C3%A9sidentiel+Sekhoutoureah%2C+Conakry%2C+Guin%C3%A9e!5e0!3m2!1sfr!2sfr!4v1497598168502"></iframe>
-                                        </div><!--item_img-->
                                         <div class="item_title_date" style="position: initial">
                                             <div class="news_item_title">
-                                                <h1><a href="#">Nous Contacter</a></h1>
+                                                <h1><a href="#" style="text-transform: uppercase">S'inscrire et Agir</a></h1>
                                             </div><!--news_item_title-->
                                         </div><!--item_title_date-->
                                     </div><!--item_wrapper-->
-                                    <div class="item_content">
-                                        Vous voulez agir avec nous, vous avez des choses à dire, à montrer, contacter nous.
+                                    <div class="item_content" style="font-size: 16px;line-height: 30px;">
+                                        Nondi Guinée est une plateforme d’alerte et de dénonciation de la mauvaise gouvernance, de l'injustice, de la discrimination.... en vue de susciter l’éveil de la conscience citoyenne et d'inciter le peuple à ne plus se laisser faire. Il faut agir et maintenant.
+                                        <h3>Vous voulez agir avec nous, vous avez des choses à dire, à montrer, inscrivez vous.</h3>
                                     </div><!--item_content-->
 
                                 </div><!--item-->
                             </div><!--feature_news_item-->
-                            <form class="form" method="post" action="{{ url_for('front.contact') }}" id="contact_form">
-                                <h2>NOUS CONTACTER</h2>
+                            <form class="form" method="post" action="{{ url_for('front.register') }}" id="register_form">
+                                <h2>S'INSCRIRE</h2>
                                 <div id="result"></div>
                                 <p type="NOM:"><input id="name" name="name" required="required" type="text" value=""/></p>
                                 <p type="EMAIL:"><input id="email" name="email" required="required" type="email" value=""/></p>
-                                <p type="SUJET:"><input id="subject" name="subject" required="required" type="text" value=""/></p>
-                                <p type="MESSAGE:"><textarea id="message" name="message" required="required"></textarea></p>
+                                <p type="MOT DE PASSE:"><input id="password" name="password" required="required" type="password" value=""/></p>
+                                <p type="COMPTE FACEBOOK:"><input id="facebook" name="facebook" required="required" type="text" value=""/></p>
+                                <p type="TÉLEPHONE:"><input id="phone" name="phone" required="required" type="text" value=""/></p>
                                 <button type="submit" id="submit_btn">Envoyer</button>
                                 <div>
-                                    {#  <span class="fa fa-phone"></span>001 1023 567  #}
-                                    <span class="fa fa-envelope-o"></span> contact@nondi.org
+                                    <a href="{{ url_for('auth.login') }}"><span class="fa fa-lock"></span> Déjà inscrit</a>
                                 </div>
                             </form>
                         </div>

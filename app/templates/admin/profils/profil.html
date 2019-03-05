@@ -2,7 +2,6 @@
 {% block title %} Profil {{current_user.name}} {% endblock %}
 {% block content %}
 
-<!--suppress ALL -->
     <div class="content-wrapper">
     <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -25,24 +24,11 @@
                     <!-- Profile Image -->
                     <div class="box box-primary">
                         <div class="box-body box-profile">
-                            <img class="profile-user-img img-responsive img-circle" src="{{url_for('static',filename=current_user.photo)}}"  alt="{{current_user.name}}">
+                            <img class="profile-user-img img-responsive img-circle" src="{{url_for('static',filename='upload/users/'+current_user.photo)}}"  alt="{{current_user.name}}">
 
                             <h3 class="profile-username text-center">{{current_user.name}}</h3>
 
                             <p class="text-muted text-center">{{current_user.job}}</p>
-
-                            {# <ul class="list-group list-group-unbordered">
-                                <li class="list-group-item">
-                                    <b>Followers</b> <a class="pull-right">1,322</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Following</b> <a class="pull-right">543</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Friends</b> <a class="pull-right">13,287</a>
-                                </li>
-                            </ul>#}
-
                             <a href="#" class="btn btn-primary btn-block"><b>Suivre</b></a>
                         </div>
                         <!-- /.box-body -->

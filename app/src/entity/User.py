@@ -41,6 +41,10 @@ class User(Entity, UserMixin, db.Model):
     def is_admin(self):
         return self.role == "admin"
 
+    @property
+    def is_active(self):
+        return self.activated == True
+
     def __repr__(self):
         return "User: {}".format(self.name)
 

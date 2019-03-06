@@ -52,3 +52,6 @@ class Article(Entity, db.Model):
 
     def get_extrait(self, _len=100):
         return strip_tags(self.content[0:_len])
+
+    def is_author(self, user):
+        return self.user_id == user.id

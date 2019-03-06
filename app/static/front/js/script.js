@@ -93,9 +93,9 @@ jQuery(function ($) {
             $.post(contact_url, post_data, function (response) {
                 //load json data from server and output message
                 if (response.type === 'error') {
-                    output = '<div class="error">' + response.text + '</div>';
+                     output = '<div class="alert alert-danger" role="alert">' + response.text + '</div>';
                 } else {
-                    output = '<div class="success">' + response.text + '</div>';
+                     output = '<div class="alert alert-success" role="alert">' + response.text + '</div>';
                     //reset values in all input fields
                     $('#contact_form input').val('');
                     $('#contact_form textarea').val('');

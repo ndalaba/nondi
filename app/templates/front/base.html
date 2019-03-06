@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Diallo Mamadou N'Dalaba">
     <link href="https://fonts.googleapis.com/css?family=Oswald:400,700|Roboto:400,500" rel="stylesheet">
-    <link rel="shortcut icon" href="{{ url_for('static',filename="front/images/favico.png") }}">
+    <link rel="shortcut icon" href="{{ url_for('static',filename='front/images/favico.png') }}">
     <title>{% block title %}Nondi Guinée{% endblock %}</title>
     <meta property="og:title" content="{% block ogtitle %}Nondi Guinée{% endblock %}"/>
-    <meta property="og:image" content="{% block ogimage %}{{ url_for('static',filename="front/images/logo.png") }}{% endblock %}"/>
+    <meta property="og:image" content="{% block ogimage %}{{ url_for('static',filename='front/images/logo.png') }}{% endblock %}"/>
     <meta property="og:description" content="{% block ogdescription %}Nondi Guinée{% endblock %}"/>
     <meta property="og:type" content="article"/>
     <meta property="og:url" content="https://nondi.org"/>
@@ -19,12 +19,12 @@
     <meta property="article:publisher" content="https://www.facebook.com/nondiguinee"/>
 
     {% block stylesheets %}
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="front/css/bootstrap.min.css") }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="front/css/font-awesome.min.css") }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="front/css/owl.carousel.css") }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="front/css/owl.theme.default.min.css") }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="front/css/offcanvas.min.css") }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="front/css/style.css") }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='front/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='front/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='front/css/owl.carousel.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='front/css/owl.theme.default.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='front/css/offcanvas.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='front/css/style.css') }}">
     {% endblock %}
 
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -39,11 +39,11 @@
         {% include "front/inc/footer.html" %}
     </div>
     {% block javascript %}
-        <script type="text/javascript" src="{{ url_for('static',filename="front/js/jquery.min.js") }}"></script>
-        <script type="text/javascript" src="{{ url_for('static',filename="front/js/bootstrap.min.js") }}"></script>
-        <script type="text/javascript" src="{{ url_for('static',filename="front/js/owl.carousel.js") }}"></script>
-        <script type="text/javascript" src="{{ url_for('static',filename="front/js/script.js") }}"></script>
-        <script type="text/javascript" src="{{ url_for('static',filename="front/js/offcanvas.min.js") }}"></script>
+        <script type="text/javascript" src="{{ url_for('static',filename='front/js/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static',filename='front/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static',filename='front/js/owl.carousel.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static',filename='front/js/script.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static',filename='front/js/offcanvas.min.js') }}"></script>
     {% endblock %}
 </body>
 

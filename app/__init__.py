@@ -34,7 +34,6 @@ app.register_blueprint(auth_blueprint)
 from app.src.front import front as front_blueprint
 app.register_blueprint(front_blueprint)
 
-
 from app.src.utils.filter import datetimeformat, startswith
 app.jinja_env.filters['datetimeformat'] = datetimeformat
 app.jinja_env.filters['startswith'] = startswith

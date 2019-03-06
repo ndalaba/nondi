@@ -10,7 +10,11 @@
             <div class="form-group row">
                 <label class="col-sm-2 control-label">Contenu</label>
                 <div class="col-sm-10">
-                    {{ form.content(class='form-control summernote') }}
+                    {% if not current_user.is_admin %}
+                       {{ form.content(class='form-control summernote') }}
+                    {% else %}
+                        {{ form.content(class='form-control') }}
+                    {% endif %}
                 </div>
             </div>
         </div>

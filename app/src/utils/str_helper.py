@@ -12,7 +12,14 @@ def generate_uuid(length):
 #
 #  @param string The input string.
 #  @param allowed_tags A string to specify tags which should not be removed.
-def strip_tags(string, allowed_tags=''):
+TAG_RE = re.compile(r'<[^>]+>')
+
+
+def strip_tags(text):
+    return TAG_RE.sub('', text)
+
+
+'''def strip_tags(string, allowed_tags=''):
     if allowed_tags != '':
         # Get a list of all allowed tag names.
         allowed_tags_list = re.sub(r'[\\/<> ]+', '', allowed_tags).split(',')
@@ -34,4 +41,4 @@ def strip_tags(string, allowed_tags=''):
         # If no allowed tags, remove all.
         string = re.sub(r'<[^>]*?>', '', string)
 
-    return string
+    return string'''

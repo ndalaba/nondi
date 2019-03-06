@@ -14,9 +14,9 @@ from . import front
 from .form import EmailForm, UserForm
 
 
+
 @front.route('/')
-@front.route('/<path:path>')
-def index(path):
+def index():
     videos = Video.query.filter_by(published=True).order_by(Video.created_at.desc()).paginate(1, 6, False)
     divers = Article.query.filter_by(published=True, category_id=8).order_by(Article.created_at.desc()).paginate(1, 3, False)
     blogs = Article.query.filter_by(published=True, category_id=7, top=False).order_by(Article.created_at.desc()).paginate(1, 4, False)
@@ -142,3 +142,8 @@ def register():
         return jsonify(type="error", text="Erreur formulaire.")
     else:
         return render_template('front/register.html')
+
+
+@front.route('/<path:path>')
+def all_route(path):
+    return redirect(url_for('front.index'))

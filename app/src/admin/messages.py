@@ -6,10 +6,12 @@ from sqlalchemy import text
 from app.src.repository.Repository import Repository
 from flask_mail import Message as Msg
 from app import mail
+from app.src.utils.auth import is_admin
 
 
 @admin.route('/messages')
 @login_required
+@is_admin
 def messages():
     emails = Message.query.filter_by(user_id=current_user.id, folder='INBOX').order_by(text('created_at DESC'))[:15]
     #emails = Message.query.filter_by(user_id=current_user.id,folder='INBOX').order_by(text('created_at DESC')).limit(15).all()
@@ -18,6 +20,7 @@ def messages():
 
 @admin.route('/messages/envoyes')
 @login_required
+@is_admin
 def send_messages():
     emails = Message.query.filter_by(user_id=current_user.id, folder='SEND').order_by(text('created_at DESC'))[:15]
     return render_template('admin/messages/index.html', emails=emails)
@@ -25,6 +28,7 @@ def send_messages():
 
 @admin.route('/messages/nouveau',methods=('GET','POST'))
 @login_required
+@is_admin
 def compose():
     if request.method == 'POST':
         new_mail = Message(user_id=current_user.id)
@@ -50,6 +54,7 @@ def compose():
 
 @admin.route('/messages/detail/<uid>')
 @login_required
+@is_admin
 def read(uid):
     email = Message.query.filter_by(user_id=current_user.id, uid=uid).one()
     email.read=True
@@ -59,6 +64,7 @@ def read(uid):
 
 @admin.route('/messages/repondre/<uid>', methods=('GET', 'POST'))
 @login_required
+@is_admin
 def repondre(uid):
     email = Message.query.filter_by(user_id=current_user.id, uid=uid).one()
     new_mail = Message(user_id=current_user.id)
@@ -70,6 +76,7 @@ def repondre(uid):
 
 @admin.route('/message/supprimer/<uid>')
 @login_required
+@is_admin
 def delete_message(uid):
     email = Message.query.filter_by(user_id=current_user.id, uid=uid).one()
     Repository.delete(email)

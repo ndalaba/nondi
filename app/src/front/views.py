@@ -1,5 +1,6 @@
 from flask import render_template, url_for, jsonify, redirect, request
 from flask_mail import Message as Msg
+from sqlalchemy import text
 
 from app import mail
 from app.src.entity.Article import Article, Category
@@ -11,11 +12,11 @@ from app.src.entity.Video import Video
 from app.src.repository.Repository import Repository
 from . import front
 from .form import EmailForm, UserForm
-from sqlalchemy import text
 
 
 @front.route('/')
-def index():
+@front.route('/<path:path>')
+def index(path):
     videos = Video.query.filter_by(published=True).order_by(Video.created_at.desc()).paginate(1, 6, False)
     divers = Article.query.filter_by(published=True, category_id=8).order_by(Article.created_at.desc()).paginate(1, 3, False)
     blogs = Article.query.filter_by(published=True, category_id=7, top=False).order_by(Article.created_at.desc()).paginate(1, 4, False)

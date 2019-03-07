@@ -33,8 +33,8 @@ def home():
         users_activated = User.query.filter_by(activated=True).count()
         page_activated = Page.query.filter_by(published=True).count()
         users = User.query.filter_by(activated=False).order_by(User.created_at.desc()).all()
-        return render_template('admin/home.html', articles_published=articles_published, users=users, videos_published=videos_published, users_activated=users_activated, page_activated=page_activated, form=form, categories=categories)
+        return render_template('admin/home.html', articles_published=articles_published, users=users, videos_published=videos_published, users_activated=users_activated, page_activated=page_activated, form=form, url=url_for('admin.add_article'), categories=categories)
     else:
         articles_published = Article.query.filter_by(published=True, user_id=current_user.id).count()
         videos_published = Video.query.filter_by(published=True, user_id=current_user.id).count()
-        return render_template('admin/home.html', articles_published=articles_published, videos_published=videos_published, form=form, categories=categories)
+        return render_template('admin/home.html', articles_published=articles_published, videos_published=videos_published, form=form, url=url_for('admin.add_article'),categories=categories)

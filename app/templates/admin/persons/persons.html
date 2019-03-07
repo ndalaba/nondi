@@ -41,7 +41,7 @@
                                             <a href="{{ url_for('front.persons',slug=person.slug) }}" target="_blank" title="{{ person.name }}">{{ person.name }}</a>
                                         </td>
                                         <td>{{ person.fonction }}</td>
-                                            <td><a href="{{url_for('static',filename=person.image)}}" target="_blank"><img width="50px" src="{{url_for('static',filename=person.image)}}" alt="{{ person.title }}"></a></td>
+                                            <td><a href="{{url_for('static',filename='upload/persons/'+person.image)}}" target="_blank"><img width="50px" src="{{url_for('static',filename='upload/persons/'+person.image)}}" alt="{{ person.name }}"></a></td>
                                             {% if person.published %}
                                                 <td>
                                                     <span class="label label-success">Publié</span>

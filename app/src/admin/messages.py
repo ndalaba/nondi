@@ -9,10 +9,14 @@ from app import mail
 from app.src.utils.auth import is_admin
 
 
-@admin.route('/messages')
+@admin.route('/messages',methods=['GET','POST'])
 @login_required
 @is_admin
 def messages():
+    if request.method=='POST':
+        if request.form.get('action')=="remove":
+            uids = request.form.getlist('uid')
+            Repository.remove_all_by_uid(Message,uids)
     emails = Message.query.filter_by(user_id=current_user.id, folder='INBOX').order_by(text('created_at DESC'))[:15]
     #emails = Message.query.filter_by(user_id=current_user.id,folder='INBOX').order_by(text('created_at DESC')).limit(15).all()
     return render_template('admin/messages/index.html', emails=emails)

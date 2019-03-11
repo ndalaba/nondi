@@ -12,3 +12,4 @@ body{font-size: 15px}
 .content-header>.breadcrumb{text-transform: uppercase;}
 .skin-green .sidebar a{color: #b8c7ce}
 .main-footer {background: #ecf0f5; padding: 15px; color: #444; border-top: none; }
+.users-list>li { width: 45%;}

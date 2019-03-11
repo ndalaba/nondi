@@ -18,7 +18,7 @@ class User(Entity, UserMixin, db.Model):
     phone = db.Column(db.String(20), unique=True)
     role = db.Column(db.String(60), default="edition")
     password_hash = db.Column(db.String(130))
-    photo = db.Column(db.String(130), unique=True)
+    photo = db.Column(db.String(130), unique=False)
     facebook = db.Column(db.String(190))
     activated = db.Column(db.Boolean, default=False)
 

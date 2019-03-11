@@ -37,7 +37,7 @@
                         <div class="box-body no-padding" style="">
                             <ul class="users-list clearfix">
                                 {% for user in users %}
-                                    <li style="width: 10%">
+                                    <li>
                                         <img src="{{ url_for('static',filename='upload/users/'+user.photo) }}" alt="{{ user.name }}">
                                         <a class="users-list-name" href="{{ url_for('admin.edit_user',uid=user.uid) }}">{{ user.name }}</a>
                                         <span class="users-list-date">{{ user.email }}</span>

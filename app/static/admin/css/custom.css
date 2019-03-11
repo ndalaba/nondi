@@ -3,13 +3,14 @@ body{font-size: 15px}
 .skin-blue .main-header .navbar {background-color: #222d32;}
 .skin-blue .main-header .logo { background-color: #222d32;}
 .treeview-menu>li>a {padding: 5px 5px 5px 35px;}
+.users-list>li { width: 15%;}
 @media (max-width: 767px){
     .main-header .logo{display: none}
     .fixed .content-wrapper{padding-top: 50px}
     .main-sidebar{padding-top: 50px;}
+    .users-list>li { width: 45%;}
 }
 .content-header>h1{text-transform: uppercase;font-size: 20px}
 .content-header>.breadcrumb{text-transform: uppercase;}
 .skin-green .sidebar a{color: #b8c7ce}
 .main-footer {background: #ecf0f5; padding: 15px; color: #444; border-top: none; }
-.users-list>li { width: 45%;}

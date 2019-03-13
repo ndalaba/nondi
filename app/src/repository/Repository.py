@@ -46,3 +46,18 @@ class Repository:
     def set_normal(entity, uids):
         db.session.query(entity).filter(entity.uid.in_(uids)).update({entity.top: False}, synchronize_session=False)
         db.session.commit()
+
+    # Activate all users with given uids
+
+    @staticmethod
+    def activate_all_by_uid(entity, uids):
+        db.session.query(entity).filter(entity.uid.in_(uids)).update(
+            {entity.activated: True}, synchronize_session=False)
+        db.session.commit()
+
+    # Deactivate all users with given uids
+    @staticmethod
+    def deactivate_all_by_uid(entity, uids):
+        db.session.query(entity).filter(entity.uid.in_(uids)).update(
+            dict(activated=False), synchronize_session=False)
+        db.session.commit()

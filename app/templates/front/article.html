@@ -2,7 +2,7 @@
 {% block title %} {{ article.title }} | Nondi Guinée{% endblock %}
 {% block ogtitle %}{{ article.title }} | Nondi Guinée{% endblock %}
 {% block ogimage %}{{ 'https://'+request.host + url_for('static',filename='upload/articles/'+article.image) }}{% endblock %}
-{% block ogdescription %}{{ article.get_extrait(200) }}{% endblock %}
+{% block ogdescription %}{{ article.get_extrait(300) }}{% endblock %}
 {% block ogauthor %}{{ article.user.name }}{% endblock %}
 {% block content %}
     <section id="feature_category_section" class="feature_category_section single-page section_wrapper">

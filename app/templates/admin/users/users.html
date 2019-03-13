@@ -16,6 +16,7 @@
         </section>
         {% include "admin/inc/success_error.html" %}
         <!-- Main content -->
+         <form action="{{ url_for('admin.users') }}" class="form-inline">
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
@@ -23,34 +24,81 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">LISTE MEMBRES</h3>
                             <div class="box-tools pull-right">
-                                {% if not show_all %}
-                                    <span class="label label-danger">{{ users | length }} nouveaux Membres</span>
-                                {% endif %}
-
+                            
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                 </button>
                                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
                                 </button>
                             </div>
+                            <div style="margin: auto;width: 50%;">
+                                    <div class="form-group">
+                                        <!--<label>Sélectionnez l’action groupée</label>-->
+                                        <select name="todo" class="form-control">
+                                            <option value="9999">Actions groupées</option>
+                                            <option value="-1">Supprimer</option>
+                                            <option value="1">Activer</option>
+                                            <option value="0">Desactiver</option>                                           
+                                        </select>
+                                        <input type="submit" name="doaction" id="doaction" class="btn btn-primary action" value="Appliquer">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" name="email" placeholder="email"  value="{{ request.args.get('email') or "" }}" >
+                                        <select name="active" class="form-control">
+                                            <option value="">Etat</option>
+                                            <option value="1" {% if request.args.get('active') == '1' %} selected {% endif %}>Activé</option>
+                                            <option value="0" {% if request.args.get('active') == '0' %} selected {% endif %}>Non Activé</option>
+                                        </select>                                
+                                        <input type="submit" name="doaction" id="post-query-submit" class="btn btn-primary" value="Filtrer">
+                                    </div>
+                                </div>
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body no-padding" style="">
-                            <ul class="users-list clearfix">
-                                {% for user in users %}
-                                    <li>
-                                        <img src="{{ url_for('static',filename='upload/users/'+user.photo) }}" alt="{{ user.name }}">
-                                        <a class="users-list-name" href="{{ url_for('admin.edit_user',uid=user.uid) }}">{{ user.name }}</a>
-                                        <span class="users-list-date">{{ user.email }}</span>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                            <!-- /.users-list -->
-                        </div>
-                        {% if not show_all %}
-                            <div class="box-footer text-center">
-                                <a href="{{ url_for('admin.users',show_all=1) }}" class="uppercase">Afficher tous les membres</a>
+
+
+                        <div class="box-body">
+                                <div class="box-body table-responsive no-padding">
+                                    <table class="table table-hover">
+                                        <tbody>
+                                        <tr>
+                                            <th><input type="checkbox" title="Tout sélectionner" id="select_all"/></th>
+                                            <th>Nom</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Facebook</th>
+                                            <th>Photo</th>
+                                            <th>Etat</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        {% for user in users %}
+                                            <tr>
+                                                <td><input type="checkbox" name="uid" value="{{ user.uid }}"/></td>                                        
+                                                <td>{{ user.name }}</td>
+                                                <td>{{ user.email }}</td>
+                                                <td>{{ user.phone }}</td>
+                                                <td><a href="{{user.facebook}}" target="_blank">{{ user.facebook }}</a></td>
+                                                <td><img src="{{ url_for('static',filename='upload/users/'+user.photo) }}" alt="{{ user.name }}" style="width:50px"></td>
+                                                {% if user.is_active %}
+                                                    <td>
+                                                        <span class="label label-success">Activé</span>
+                                                    </td>
+                                                {% else %}
+                                                    <td>
+                                                        <span class="label label-danger">Non activé</span>
+                                                    </td>
+                                                {% endif %}
+                                                
+                                                <td>
+                                                    <a class="btn btn-primary btn-sm" href="{{ url_for('admin.edit_user',uid=user.uid) }}" title="{{ user.name }}"><i class="fa fa-pencil"></i></a>
+                                                    <a class="btn btn-default btn-sm delete" title="Supprimer le membre?" href="{{ url_for('admin.delete_user',uid=user.uid) }}"><i class="fa fa-trash-o"></i></a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        {% else %}
+
+                       
                             <div class="box-footer clearfix">
                                 <ul class="pagination pagination-sm no-margin pull-right">
                                     {% if prev_url %}
@@ -61,13 +109,14 @@
                                     {% endif %}
                                 </ul>
                             </div>
-                        {% endif %}
+                       
                     </div>
 
                 </div>
             </div>
             <!-- /.row -->
         </section>
+        </form>
         <!-- /.content -->
     </div>
 {% endblock %}

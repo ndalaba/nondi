@@ -1,5 +1,5 @@
 {% extends "admin/base.html" %}
-{% block title %} Acceuil {{current_user.name}} {% endblock %}
+{% block title %} Accueil {{current_user.name}} {% endblock %}
 {% block content %}
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -9,7 +9,7 @@
                 <small>D’un coup d’œil</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> ACCEUIL</a></li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> ACCUEIL</a></li>
                 <li class="active">Tableau de bord</li>
             </ol>
         </section>
@@ -90,18 +90,27 @@
                                 </div>
                             </div>
                             <!-- /.box-header -->
-                            <div class="box-body no-padding" style="">
-                                <ul class="users-list clearfix">
-                                    {% for user in users %}
-                                        <li>
-                                            <img src="{{ url_for('static',filename='upload/users/'+user.photo) }}" alt="{{ user.name }}">
-                                            <a class="users-list-name" href="{{ url_for('admin.edit_user',uid=user.uid) }}">{{ user.name }}</a>
-                                            <span class="users-list-date">{{ user.email }}</span>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                                <!-- /.users-list -->
+                             <div class="box-body">
+                                <div class="box-body table-responsive no-padding">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>                                                                                
+                                        </tr>
+                                        {% for user in users %}
+                                            <tr>                                                                                    
+                                                <td>{{ user.name }}</td>
+                                                <td>{{ user.email }}</td>
+                                                <td>{{ user.phone }}</td>                                                                                                                                                
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
+
                             <div class="box-footer text-center">
                                 <a href="{{ url_for('admin.users',show_all=1) }}" class="uppercase">Afficher tous les membres</a>
                             </div>

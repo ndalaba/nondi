@@ -10,9 +10,9 @@
     <link rel="shortcut icon" href="{{ url_for('static',filename='front/images/favico.png') }}">
     <title>{% block title %}Nondi Guinée{% endblock %}</title>
     <meta property="og:title" content="{% block ogtitle %}Nondi Guinée{% endblock %}"/>
-    <meta property="og:image" content="{% block ogimage %}{{ url_for('static',filename='front/images/logo.png') }}{% endblock %}"/>
-    <meta property="og:description" content="{% block ogdescription %}Nondi Guinée{% endblock %}"/>
-    <meta property="og:type" content="article"/>
+    <meta property="og:image" content="{% block ogimage %}{{ 'https://'+request.host + url_for('static',filename='front/images/logo.png') }}{% endblock %}"/>
+    <meta property="og:description" content="{% block ogdescription %}Justice et vérité en République de Guinée{% endblock %}"/>
+    <meta property="og:type" content="website"/>
     <meta property="og:url" content="https://nondi.org"/>
     <meta property="og:site_name" content="Nondi Guinée"/>
     <meta property="article:author" content="{% block ogauthor %}NONDI{% endblock %}"/>

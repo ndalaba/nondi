@@ -49,7 +49,7 @@ def compose():
         mail.send(msg)
 
         flash('Message envoyé', 'success')
-        return redirect(url_for('admin.messages'))
+        return redirect(url_for('admin.send_messages'))
     email = Message(user_id=current_user.id)
     email.email_from=current_user.email
     email.name=current_user.name

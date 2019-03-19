@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from slugify import slugify
 
 from app.src.entity.Article import Article, Category
+from app.src.entity.User import User
 from app.src.repository.Repository import Repository
 from app.src.utils.upload import uploadImage
 from . import admin
@@ -36,37 +37,53 @@ def articles():
         published = request.args.get('published')
         category = request.args.get('category')
         query = Repository.query(Article)
-        query = query.filter(Article.title.like('%' + title + '%')) if title is not None and title != "" else query
-        query = query.filter(Article.top == int(top)) if top is not None and top.isnumeric() else query
-        query = query.filter(Article.published == int(published)) if published is not None and published.isnumeric() else query
-        query = query.filter(Article.category_id == category) if category is not None and category.isnumeric() else query
+        query = query.filter(Article.title.like(
+            '%' + title + '%')) if title is not None and title != "" else query
+        query = query.filter(Article.top == int(
+            top)) if top is not None and top.isnumeric() else query
+        query = query.filter(Article.published == int(
+            published)) if published is not None and published.isnumeric() else query
+        query = query.filter(
+            Article.category_id == category) if category is not None and category.isnumeric() else query
         if current_user.is_admin:
-            articles = query.order_by(Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
+            articles = query.order_by(Article.created_at.desc()).paginate(
+                page, Article.POSTS_PER_PAGE, False)
         else:
-            articles = query.filter_by(user_id=current_user.id).order_by(Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
-        next_url = url_for('admin.articles', page=articles.next_num, todo=9999, title=title, published=published, top=top, category=category, doaction='Filtrer') if articles.has_next else None
-        prev_url = url_for('admin.articles', page=articles.prev_num, todo=9999, title=title, published=published, top=top, category=category, doaction='Filtrer') if articles.has_prev else None
+            articles = query.filter_by(user_id=current_user.id).order_by(
+                Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
+        next_url = url_for('admin.articles', page=articles.next_num, todo=9999, title=title, published=published,
+                           top=top, category=category, doaction='Filtrer') if articles.has_next else None
+        prev_url = url_for('admin.articles', page=articles.prev_num, todo=9999, title=title, published=published,
+                           top=top, category=category, doaction='Filtrer') if articles.has_prev else None
     else:
         if current_user.is_admin:
-            articles = Article.query.order_by(Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
+            articles = Article.query.order_by(Article.created_at.desc()).paginate(
+                page, Article.POSTS_PER_PAGE, False)
         else:
-            articles = Article.query.filter_by(user_id=current_user.id).order_by(Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
-        next_url = url_for('admin.articles', page=articles.next_num) if articles.has_next else None
-        prev_url = url_for('admin.articles', page=articles.prev_num) if articles.has_prev else None
+            articles = Article.query.filter_by(user_id=current_user.id).order_by(
+                Article.created_at.desc()).paginate(page, Article.POSTS_PER_PAGE, False)
+        next_url = url_for(
+            'admin.articles', page=articles.next_num) if articles.has_next else None
+        prev_url = url_for(
+            'admin.articles', page=articles.prev_num) if articles.has_prev else None
     return render_template('admin/articles/articles.html', articles=articles.items, categories=categories, next_url=next_url, prev_url=prev_url)
 
 
-@admin.route('/articles/add', methods=['POST','GET'])
+@admin.route('/articles/add', methods=['POST', 'GET'])
 @login_required
 def add_article():
     form = ArticleForm()
     categories = Category.query.all()
+    auteurs = User.query.all()
     if request.method == 'POST':
         if form.validate_on_submit:
-            article = Article(title=form.title.data, slug=slugify(form.title.data), user_id=current_user.id, category_id=form.category.data)
+            article = Article(title=form.title.data, slug=slugify(
+                form.title.data), user_id=current_user.id, category_id=form.category.data)
             if form.image.data:
                 image = uploadImage(form.image.data, 'upload/articles/')
                 article.image = image
+            if current_user.is_admin:
+                article.user_id = request.form.get('auteur')
             article.content = form.content.data
             article.published = form.published.data
             article.top = form.top.data
@@ -76,7 +93,7 @@ def add_article():
         else:
             flash('Formulaire incorrect', 'error')
     else:
-        return render_template('admin/articles/form.html', form=form, categories=categories, url=url_for('admin.add_article'))
+        return render_template('admin/articles/form.html', form=form, categories=categories, auteurs=auteurs, url=url_for('admin.add_article'))
 
 
 @admin.route('/articles/edit/<uid>', methods=['GET', 'POST'])
@@ -85,11 +102,14 @@ def edit_article(uid):
     article = Article.query.filter_by(uid=uid).first()
     form = ArticleForm(obj=article)
     categories = Category.query.all()
+    auteurs = User.query.all()
     if request.method == 'POST':
         if form.validate_on_submit:
             if form.image.data and form.image.data != article.image:
                 image = uploadImage(form.image.data, 'upload/articles/')
                 article.image = image
+            if current_user.is_admin:
+                article.user_id = request.form.get('auteur')
             article.title = form.title.data
             article.top = form.top.data
             slug_title = slugify(form.title.data)
@@ -102,7 +122,7 @@ def edit_article(uid):
             return redirect(url_for('admin.articles'))
         else:
             flash('Formulaire incorrect', 'error')
-    return render_template('admin/articles/form.html', form=form, categories=categories, url=url_for('admin.edit_article', uid=uid), article=article)
+    return render_template('admin/articles/form.html', form=form, auteurs=auteurs, categories=categories, url=url_for('admin.edit_article', uid=uid), article=article)
 
 
 @admin.route('/articles/delete/<uid>')

@@ -69,6 +69,7 @@
                                             <th><input type="checkbox" title="Tout sélectionner" id="select_all"/></th>
                                             <th>Titre</th>
                                             <th>Categorie</th>
+                                            <th>Auteur</th>
                                             <th>Vue</th>
                                             <th>Etat</th>
                                             <th>Position</th>
@@ -81,6 +82,7 @@
                                                     <a href="{{ url_for('front.article',category=article.category.slug,slug=article.slug) }}" target="_blank" title="{{ article.title }}">{{ article.title }}</a>
                                                 </td>
                                                 <td>{{ article.category.title }}</td>
+                                                <td>{{ article.user.name }}</td>
                                                 <td>{{ article.vue }}</td>
                                                 {% if article.published %}
                                                     <td>

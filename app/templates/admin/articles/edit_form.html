@@ -33,7 +33,7 @@
                     <select name="auteur" id="auteur" class="form-control" required>
                         <option value=""> -- Auteur article --</option>
                         {% for auteur in auteurs %}
-                            <option value="{{ auteur.id }}" data-auteur="{{article.user_id}}" {% if article is not undefined and auteur.id == article.user_id %} selected {% endif %}>{{ auteur.name }}</option>
+                            <option value="{{ auteur.id }}"  {% if article is not undefined and auteur.id == article.user_id %} selected {% endif %}>{{ auteur.name }}</option>
                         {% endfor %}
                     </select>
                    
